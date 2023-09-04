@@ -1,23 +1,35 @@
-import logo from './logo.svg';
+import { useState } from 'react';
+import { Route, Routes } from 'react-router-dom';
+import { HomePage } from './pages/HomePage';
+import { Header } from './components/Header';
+import { DetailsBookPage } from './pages/DetailsBookPage';
+import { NotFoundPage } from './pages/NotFoundPage';
+import { FavouriteBooks } from './components/FavouriteBooks';
 import './App.css';
+import { Controls } from './components/Controls';
 
 function App() {
+  const [openFavourites, setOpenFavourites] = useState(false);
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <Header
+        openFavourites={openFavourites}
+        setOpenFavourites={setOpenFavourites}
+      />
+
+      <Controls />
+
+      <Routes>
+        <Route path="/" element={<HomePage />} />
+        <Route path=":id" element={<DetailsBookPage />} />
+        <Route path="*" element={<NotFoundPage />} />
+      </Routes>
+
+      <FavouriteBooks
+        openFavourites={openFavourites}
+        setOpenFavourites={setOpenFavourites}
+      />
     </div>
   );
 }
