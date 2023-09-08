@@ -1,11 +1,13 @@
 import { FormControl, InputLabel, MenuItem, Select } from '@mui/material';
-import { useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { selectCategory, setCategory } from './controls-slice';
 
 export const Category = () => {
-  const [category, setCategory] = useState('all');
+  const category = useSelector(selectCategory);
+  const dispatch = useDispatch();
 
   const handleCategory = (event) => {
-    setCategory(event.target.value);
+    dispatch(setCategory(event.target.value));
   };
 
   return (

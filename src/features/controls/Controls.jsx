@@ -5,7 +5,7 @@ import { Box, Container } from '@mui/material';
 
 export const Controls = () => {
   return (
-    <Container sx={{ width: '600px' }}>
+    <Container sx={{ width: '600px', mb: '25px' }}>
       <Search />
       <Box
         sx={{ width: '100%', display: 'flex', justifyContent: 'space-between' }}

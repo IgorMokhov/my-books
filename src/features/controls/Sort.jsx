@@ -1,11 +1,13 @@
 import { FormControl, InputLabel, MenuItem, Select } from '@mui/material';
-import { useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { selectSort, setSort } from './controls-slice';
 
 export const Sort = () => {
-  const [sort, setSort] = useState('relevance');
+  const sort = useSelector(selectSort);
+  const dispatch = useDispatch();
 
   const handleSort = (event) => {
-    setSort(event.target.value);
+    dispatch(setSort(event.target.value));
   };
 
   return (

@@ -5,8 +5,8 @@ import { Header } from './components/Header';
 import { DetailsBookPage } from './pages/DetailsBookPage';
 import { NotFoundPage } from './pages/NotFoundPage';
 import { FavouriteBooks } from './components/FavouriteBooks';
+import { Controls } from './features/controls/Controls';
 import './App.css';
-import { Controls } from './components/Controls';
 
 function App() {
   const [openFavourites, setOpenFavourites] = useState(false);

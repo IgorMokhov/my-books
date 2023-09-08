@@ -1,4 +1,4 @@
-import { BooksList } from '../components/BooksList';
+import { BooksList } from '../features/books/BooksList';
 
 export const HomePage = () => {
   return (
