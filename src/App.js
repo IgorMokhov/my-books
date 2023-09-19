@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { Route, Routes } from 'react-router-dom';
 import { HomePage } from './pages/HomePage';
 import { Header } from './components/Header';
-import { DetailsBookPage } from './pages/DetailsBookPage';
+import { DetailsPage } from './pages/DetailsPage';
 import { NotFoundPage } from './pages/NotFoundPage';
 import { FavouriteBooks } from './components/FavouriteBooks';
 import { Controls } from './features/controls/Controls';
@@ -22,7 +22,7 @@ function App() {
 
       <Routes>
         <Route path="/" element={<HomePage />} />
-        <Route path=":id" element={<DetailsBookPage />} />
+        <Route path="/books/:id" element={<DetailsPage />} />
         <Route path="*" element={<NotFoundPage />} />
       </Routes>
 

@@ -13,7 +13,6 @@ export const loadBooks = createAsyncThunk(
       const response = await axios.get(
         `${api.BASE_URL}?q=${search}+subject:${selectedCategory}&orderBy=${sort}&maxResults=${api.MAX_RESULTS}&key=${api.API_KEY}`
       );
-      console.log(response.data);
       return response.data;
     } catch (error) {
       throw new Error(error.message);
@@ -22,8 +21,8 @@ export const loadBooks = createAsyncThunk(
 );
 
 const initialState = {
-  loading: 'idle', // pending / succeeded / failed
-  booksList: [],
+  loading: 'idle', // pending / succeeded  / failed
+  entities: [],
   total: 0,
   error: null,
 };
@@ -36,12 +35,13 @@ export const booksSlice = createSlice({
     builder
       .addCase(loadBooks.pending, (state) => {
         state.loading = 'pending';
+        state.entities = [];
         state.total = 0;
         state.error = null;
       })
       .addCase(loadBooks.fulfilled, (state, action) => {
         state.loading = 'succeeded';
-        state.booksList = action.payload.items;
+        state.entities = action.payload.items;
         state.total = action.payload.totalItems;
         state.error = null;
       })
@@ -55,4 +55,5 @@ export const booksSlice = createSlice({
 export const booksReducer = booksSlice.reducer;
 
 // selectors
-export const selectBooks = (state) => state.books;
+export const selectBooksAllInfo = (state) => state.books;
+export const selectBooks = (state) => state.books.entities;
