@@ -12,11 +12,14 @@ export const Category = () => {
 
   return (
     <FormControl sx={{ width: '250px' }} size="small">
-      <InputLabel>Categories</InputLabel>
       <Select
-        sx={{ textAlign: 'left' }}
+        sx={{
+          pl: '10px',
+          textAlign: 'left',
+          backgroundColor: 'white',
+          borderRadius: '20px',
+        }}
         value={category}
-        label="Categories"
         onChange={handleCategory}
       >
         <MenuItem value="all">All</MenuItem>

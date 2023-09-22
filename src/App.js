@@ -18,7 +18,7 @@ function App() {
         setOpenFavourites={setOpenFavourites}
       />
 
-      <Controls />
+      <Controls /> 
 
       <Routes>
         <Route path="/" element={<HomePage />} />

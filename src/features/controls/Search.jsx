@@ -1,6 +1,7 @@
-import { Box, TextField } from '@mui/material';
+import { Box, IconButton, InputBase } from '@mui/material';
+import SearchIcon from '@mui/icons-material/Search';
 import { useDispatch, useSelector } from 'react-redux';
-import { selectControls, selectSearch, setSearch } from './controls-slice';
+import { selectControls, setSearch } from './controls-slice';
 import { loadBooks } from '../books/books-slice';
 
 export const Search = () => {
@@ -10,7 +11,6 @@ export const Search = () => {
   const searchSubmitHandler = (event) => {
     event.preventDefault();
     dispatch(loadBooks({ search, category, sort }));
-    // dispatch(setSearch(''));
   };
 
   const onChangeHandler = (event) => dispatch(setSearch(event.target.value));
@@ -18,20 +18,29 @@ export const Search = () => {
   return (
     <Box
       component="form"
-      sx={{ m: '20px 0 20px' }}
+      sx={{
+        backgroundColor: 'white',
+        borderRadius: '20px',
+        display: 'flex',
+        mb: '20px',
+      }}
       noValidate
       autoComplete="off"
       onSubmit={searchSubmitHandler}
     >
-      <TextField
-        size="small"
-        fullWidth
+      <InputBase
+        sx={{
+          p: '5px 25px 5px',
+        }}
         type="text"
-        label="Search"
-        variant="outlined"
+        fullWidth
+        placeholder="Search ..."
         value={search}
         onChange={onChangeHandler}
       />
+      <IconButton type="submit">
+        <SearchIcon sx={{ mr: '5px', fontSize: '1.7rem' }} />
+      </IconButton>
     </Box>
   );
 };

@@ -12,11 +12,14 @@ export const Sort = () => {
 
   return (
     <FormControl sx={{ width: '250px' }} size="small">
-      <InputLabel>Sorting by</InputLabel>
       <Select
-        sx={{ textAlign: 'left' }}
+        sx={{
+          pl: '10px',
+          textAlign: 'left',
+          backgroundColor: 'white',
+          borderRadius: '20px',
+        }}
         value={sort}
-        label="Sorting by"
         onChange={handleSort}
       >
         <MenuItem value={'relevance'}>Relevance</MenuItem>
