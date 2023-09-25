@@ -23,20 +23,24 @@ export const loadBooks = createAsyncThunk(
 const initialState = {
   loading: 'idle', // pending / succeeded  / failed
   entities: [],
-  total: 0,
+  total: null,
   error: null,
 };
 
 export const booksSlice = createSlice({
   name: '@@books',
   initialState,
-  reducers: {},
+  reducers: {
+    setError: (state, action) => {
+      state.error = action.payload;
+    },
+  },
   extraReducers: (builder) => {
     builder
       .addCase(loadBooks.pending, (state) => {
         state.loading = 'pending';
         state.entities = [];
-        state.total = 0;
+        state.total = null;
         state.error = null;
       })
       .addCase(loadBooks.fulfilled, (state, action) => {
@@ -52,8 +56,10 @@ export const booksSlice = createSlice({
   },
 });
 
+export const { setError } = booksSlice.actions;
 export const booksReducer = booksSlice.reducer;
 
 // selectors
 export const selectBooksAllInfo = (state) => state.books;
 export const selectBooks = (state) => state.books.entities;
+export const selectError = (state) => state.books.error;

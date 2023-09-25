@@ -7,6 +7,7 @@ import {
   Toolbar,
   Typography,
 } from '@mui/material';
+import { Navbar } from './Navbar';
 
 export const Header = ({ openFavourites, setOpenFavourites }) => {
   return (
@@ -20,10 +21,12 @@ export const Header = ({ openFavourites, setOpenFavourites }) => {
             My Books
           </Typography>
 
+          <Navbar />
+
           <IconButton
             color="inherit"
             onClick={() => setOpenFavourites(!openFavourites)}
-            sx={{ ml: 'auto' }}
+            sx={{ ml: '10px' }}
           >
             <Badge badgeContent={4} color="secondary">
               <CollectionsBookmark />

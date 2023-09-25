@@ -6,6 +6,7 @@ import { DetailsPage } from './pages/DetailsPage';
 import { NotFoundPage } from './pages/NotFoundPage';
 import { FavouriteBooks } from './components/FavouriteBooks';
 import { Controls } from './features/controls/Controls';
+import { AboutPage } from './pages/AboutPage';
 import './App.css';
 
 function App() {
@@ -18,11 +19,12 @@ function App() {
         setOpenFavourites={setOpenFavourites}
       />
 
-      <Controls /> 
+      <Controls />
 
       <Routes>
         <Route path="/" element={<HomePage />} />
         <Route path="/books/:id" element={<DetailsPage />} />
+        <Route path="/about" element={<AboutPage />} />
         <Route path="*" element={<NotFoundPage />} />
       </Routes>
 

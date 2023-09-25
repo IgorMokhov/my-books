@@ -1,4 +1,4 @@
-import { Container, Typography } from '@mui/material';
+import { CircularProgress, Container, Typography } from '@mui/material';
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
@@ -21,11 +21,7 @@ export const DetailsBook = () => {
 
   return (
     <Container>
-      {loading === 'pending' && (
-        <Typography variant="h5" component="h5">
-          Loading Details Book...
-        </Typography>
-      )}
+      {loading === 'pending' && <CircularProgress />}
       {loading === 'failed' && (
         <Typography variant="h5" component="h5">
           {`Error: ${error}`}

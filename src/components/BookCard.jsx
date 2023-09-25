@@ -19,7 +19,13 @@ export const BookCard = ({ image, title, authors, categories, id }) => {
           to={`/books/${id}`}
         >
           <CardMedia
-            sx={{ height: 180, width: 'auto', pt: '30px', m: '0 auto 0' }}
+            sx={{
+              height: 180,
+              width: 'auto',
+              m: '30px auto 0',
+              boxShadow: '10px 10px 5px 0px rgba(0,0,0,0.75)',
+              borderRadius: '5px',
+            }}
             component="img"
             alt={title}
             image={image || notFoundImg}

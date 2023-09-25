@@ -1,4 +1,4 @@
-import { Container, Grid, Typography } from '@mui/material';
+import { CircularProgress, Container, Grid, Typography } from '@mui/material';
 import { useSelector } from 'react-redux';
 import { selectBooksAllInfo } from './books-slice';
 import { BookCard } from '../../components/BookCard';
@@ -8,16 +8,17 @@ export const BooksList = () => {
 
   return (
     <Container>
-      {!!total && (
-        <Typography sx={{ mb: '10px' }} variant="span" component="p">
-          Founded {total} results
+      {total > 0 && (
+        <Typography sx={{ mb: '20px' }} variant="h6" component="p">
+          {`Found ${total} ${total > 1 ? 'books' : 'book'}`}
         </Typography>
       )}
-      {loading === 'pending' && (
-        <Typography variant="h5" component="h5">
-          Loading...
+      {total === 0 && (
+        <Typography sx={{ mb: '20px' }} variant="h6" component="p">
+          Nothing found
         </Typography>
       )}
+      {loading === 'pending' && <CircularProgress />}
       {loading === 'failed' && (
         <Typography variant="h5" component="h5">
           {`Error: ${error}`}
@@ -26,7 +27,7 @@ export const BooksList = () => {
 
       <Grid container spacing={2}>
         {loading === 'succeeded' &&
-          entities.map((book) => (
+          entities?.map((book) => (
             <BookCard
               key={book.id}
               id={book.id}

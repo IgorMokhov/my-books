@@ -2,14 +2,19 @@ import { Box, IconButton, InputBase } from '@mui/material';
 import SearchIcon from '@mui/icons-material/Search';
 import { useDispatch, useSelector } from 'react-redux';
 import { selectControls, setSearch } from './controls-slice';
-import { loadBooks } from '../books/books-slice';
+import { loadBooks, selectError, setError } from '../books/books-slice';
 
 export const Search = () => {
   const { search, category, sort } = useSelector(selectControls);
+  const error = useSelector(selectError);
   const dispatch = useDispatch();
 
   const searchSubmitHandler = (event) => {
     event.preventDefault();
+    if (!search.trim()) {
+      dispatch(setError('search is empty'));
+      return;
+    }
     dispatch(loadBooks({ search, category, sort }));
   };
 
@@ -34,7 +39,11 @@ export const Search = () => {
         }}
         type="text"
         fullWidth
-        placeholder="Search ..."
+        placeholder={
+          error === 'search is empty'
+            ? 'Please enter something ...'
+            : 'Search ...'
+        }
         value={search}
         onChange={onChangeHandler}
       />

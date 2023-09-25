@@ -1,16 +1,16 @@
 import { Search } from './Search';
 import { Category } from './Category';
 import { Sort } from './Sort';
-import { Box, Container } from '@mui/material';
+import { Box, Container, Paper, Typography } from '@mui/material';
 import backgroundImg from '../../accets/backgroundImg.jpg';
 
 export const Controls = () => {
   return (
-    <Box
+    <Paper
       sx={{
-        height: '300px',
+        height: '350px',
         pt: '100px',
-        mb: '20px',
+        mb: '15px',
         backgroundImage: `url(${backgroundImg})`,
         backgroundRepeat: 'no-repeat',
         backgroundSize: 'cover',
@@ -19,6 +19,13 @@ export const Controls = () => {
       component="div"
     >
       <Container maxWidth="sm">
+        <Typography
+          sx={{ color: 'white', mb: '30px' }}
+          variant="h2"
+          component="h2"
+        >
+          Find Your Book
+        </Typography>
         <Search />
         <Box
           sx={{
@@ -31,6 +38,6 @@ export const Controls = () => {
           <Sort />
         </Box>
       </Container>
-    </Box>
+    </Paper>
   );
 };
