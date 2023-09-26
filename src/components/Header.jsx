@@ -17,7 +17,7 @@ export const Header = ({ openFavourites, setOpenFavourites }) => {
     >
       <Container>
         <Toolbar>
-          <Typography sx={{ fontWeight: 'bold' }} variant="h4" component="span">
+          <Typography sx={{}} variant="h4" component="span">
             My Books
           </Typography>
 

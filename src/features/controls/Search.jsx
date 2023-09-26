@@ -11,10 +11,12 @@ export const Search = () => {
 
   const searchSubmitHandler = (event) => {
     event.preventDefault();
+
     if (!search.trim()) {
       dispatch(setError('search is empty'));
       return;
     }
+
     dispatch(loadBooks({ search, category, sort }));
   };
 

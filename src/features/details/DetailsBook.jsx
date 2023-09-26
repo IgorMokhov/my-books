@@ -9,7 +9,7 @@ export const DetailsBook = () => {
   const { loading, currentBook, error } = useSelector(selectDetails);
   const dispatch = useDispatch();
 
-  const deleteHtmlTags = (html) => {};
+  // const deleteHtmlTags = (html) => {};
 
   useEffect(() => {
     dispatch(loadDetailsBook(id));

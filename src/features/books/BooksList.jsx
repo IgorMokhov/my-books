@@ -1,7 +1,7 @@
 import { CircularProgress, Container, Grid, Typography } from '@mui/material';
 import { useSelector } from 'react-redux';
 import { selectBooksAllInfo } from './books-slice';
-import { BookCard } from '../../components/BookCard';
+import { BookCard } from './BookCard';
 
 export const BooksList = () => {
   const { loading, entities, total, error } = useSelector(selectBooksAllInfo);
@@ -9,12 +9,20 @@ export const BooksList = () => {
   return (
     <Container>
       {total > 0 && (
-        <Typography sx={{ mb: '20px' }} variant="h6" component="p">
+        <Typography
+          sx={{ mb: '20px', fontWeight: '400' }}
+          variant="h6"
+          component="p"
+        >
           {`Found ${total} ${total > 1 ? 'books' : 'book'}`}
         </Typography>
       )}
       {total === 0 && (
-        <Typography sx={{ mb: '20px' }} variant="h6" component="p">
+        <Typography
+          sx={{ mb: '20px', fontWeight: '400' }}
+          variant="h6"
+          component="p"
+        >
           Nothing found
         </Typography>
       )}

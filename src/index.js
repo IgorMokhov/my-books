@@ -8,14 +8,9 @@ import App from './App';
 import './index.css';
 
 const theme = createTheme({
-  // palette: {
-  //   primary: {
-  //     main: '#fff',
-  //   },
-  //   // secondary: {
-  //   //   // main: '#edf2ff',
-  //   // },
-  // },
+  typography: {
+    fontFamily: 'Poppins, sans-serif',
+  },
 });
 
 const root = ReactDOM.createRoot(document.getElementById('root'));

@@ -20,7 +20,7 @@ export const Controls = () => {
     >
       <Container maxWidth="sm">
         <Typography
-          sx={{ color: 'white', mb: '30px' }}
+          sx={{ color: 'white', fontWeight: '400', mb: '30px' }}
           variant="h2"
           component="h2"
         >

@@ -7,12 +7,19 @@ import {
   Typography,
 } from '@mui/material';
 import { Link as RouterLink } from 'react-router-dom';
-import notFoundImg from '../accets/cover-not-found.jpg';
+import notFoundImg from '../../accets/cover-not-found.jpg';
 
 export const BookCard = ({ image, title, authors, categories, id }) => {
   return (
     <Grid item xs={4} md={3}>
-      <Card sx={{ maxWidth: 220 }}>
+      <Card
+        sx={{
+          maxWidth: 220,
+          backgroundColor: 'rgb(245, 245, 245)',
+          transition: 'all 0.3s ease',
+          '&:hover': { transform: 'translateY(-6px)' },
+        }}
+      >
         <Link
           sx={{ textDecoration: 'none', color: 'inherit' }}
           component={RouterLink}
@@ -23,7 +30,7 @@ export const BookCard = ({ image, title, authors, categories, id }) => {
               height: 180,
               width: 'auto',
               m: '30px auto 0',
-              boxShadow: '10px 10px 5px 0px rgba(0,0,0,0.75)',
+              boxShadow: '10px 10px 13px 0px rgba(0,0,0,0.75)',
               borderRadius: '5px',
             }}
             component="img"
@@ -54,7 +61,7 @@ export const BookCard = ({ image, title, authors, categories, id }) => {
               variant="h6"
               component="h6"
             >
-              {title.length > 50 ? `${title.slice(0, 50)}...` : title}
+              {title.length > 40 ? `${title.slice(0, 40)}...` : title}
             </Typography>
             <Typography sx={{ fontSize: '12px' }} variant="p" component="span">
               {authors?.[0]}
