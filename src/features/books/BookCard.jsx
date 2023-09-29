@@ -1,3 +1,4 @@
+import { Link as RouterLink } from 'react-router-dom';
 import {
   Card,
   CardContent,
@@ -6,8 +7,7 @@ import {
   Link,
   Typography,
 } from '@mui/material';
-import { Link as RouterLink } from 'react-router-dom';
-import notFoundImg from '../../accets/cover-not-found.jpg';
+import notFoundImg from '../../accets/not-found-img.jpg';
 
 export const BookCard = ({ image, title, authors, categories, id }) => {
   return (
@@ -15,7 +15,7 @@ export const BookCard = ({ image, title, authors, categories, id }) => {
       <Card
         sx={{
           maxWidth: 220,
-          backgroundColor: 'rgb(245, 245, 245)',
+          backgroundColor: 'rgb(250, 250, 250)',
           transition: 'all 0.3s ease',
           '&:hover': { transform: 'translateY(-6px)' },
         }}

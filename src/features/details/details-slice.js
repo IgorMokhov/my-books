@@ -1,8 +1,8 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import axios from 'axios';
 
-export const loadDetailsBook = createAsyncThunk(
-  '@@details/loadDetailsBook',
+export const loadBookById = createAsyncThunk(
+  '@@details/loadBookById',
   async (id, { extra: api }) => {
     try {
       const response = await axios.get(
@@ -29,15 +29,15 @@ export const detailsSlice = createSlice({
   },
   extraReducers: (builder) => {
     builder
-      .addCase(loadDetailsBook.pending, (state, action) => {
+      .addCase(loadBookById.pending, (state, action) => {
         state.loading = 'pending';
         state.error = null;
       })
-      .addCase(loadDetailsBook.fulfilled, (state, action) => {
+      .addCase(loadBookById.fulfilled, (state, action) => {
         state.loading = 'succeeded';
         state.currentBook = action.payload;
       })
-      .addCase(loadDetailsBook.rejected, (state, action) => {
+      .addCase(loadBookById.rejected, (state, action) => {
         state.loading = 'failed';
         state.error = action.error.message;
       });

@@ -1,12 +1,15 @@
 import { useState } from 'react';
 import { Route, Routes } from 'react-router-dom';
-import { HomePage } from './pages/HomePage';
+
 import { Header } from './components/Header';
-import { DetailsPage } from './pages/DetailsPage';
-import { NotFoundPage } from './pages/NotFoundPage';
-import { FavouriteBooks } from './components/FavouriteBooks';
 import { Controls } from './features/controls/Controls';
+import { FavouriteBooks } from './components/FavouriteBooks';
+
+import { HomePage } from './pages/HomePage';
+import { DetailsPage } from './pages/DetailsPage';
 import { AboutPage } from './pages/AboutPage';
+import { NotFoundPage } from './pages/NotFoundPage';
+
 import './App.css';
 
 function App() {
