@@ -1,13 +1,17 @@
 import { Link as RouterLink } from 'react-router-dom';
+import { FavouriteButton } from '../../UI/FavouriteButton';
+import notFoundImg from '../../accets/not-found-img.jpg';
+
 import {
+  Box,
   Card,
   CardContent,
   CardMedia,
   Grid,
   Link,
+  Tooltip,
   Typography,
 } from '@mui/material';
-import notFoundImg from '../../accets/not-found-img.jpg';
 
 export const BookCard = ({ image, title, authors, categories, id }) => {
   return (
@@ -18,6 +22,7 @@ export const BookCard = ({ image, title, authors, categories, id }) => {
           backgroundColor: 'rgb(250, 250, 250)',
           transition: 'all 0.3s ease',
           '&:hover': { transform: 'translateY(-6px)' },
+          position: 'relative',
         }}
       >
         <Link
@@ -42,6 +47,7 @@ export const BookCard = ({ image, title, authors, categories, id }) => {
             sx={{
               height: 90,
               p: '15px 10px',
+              // position: 'relative',
             }}
           >
             <Typography
@@ -66,6 +72,14 @@ export const BookCard = ({ image, title, authors, categories, id }) => {
             <Typography sx={{ fontSize: '12px' }} variant="p" component="span">
               {authors?.[0]}
             </Typography>
+            <Box sx={{ position: 'absolute', top: '0px', right: '0px' }}>
+              <FavouriteButton
+                id={id}
+                title={title}
+                image={image}
+                size="medium"
+              />
+            </Box>
           </CardContent>
         </Link>
       </Card>

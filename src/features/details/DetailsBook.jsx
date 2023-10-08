@@ -1,3 +1,15 @@
+import { useEffect } from 'react';
+
+import { useParams } from 'react-router-dom';
+import { Link as RouterLink } from 'react-router-dom';
+
+import { useDispatch, useSelector } from 'react-redux';
+import { clearDetails, loadBookById, selectDetails } from './details-slice';
+
+import { FavouriteButton } from '../../UI/FavouriteButton';
+import notFoundImg from '../../accets/not-found-img.jpg';
+
+import parse from 'html-react-parser';
 import {
   Box,
   CircularProgress,
@@ -8,13 +20,6 @@ import {
   styled,
 } from '@mui/material';
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
-import { useEffect } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { Link as RouterLink } from 'react-router-dom';
-import { useParams } from 'react-router-dom';
-import { clearDetails, loadBookById, selectDetails } from './details-slice';
-import parse from 'html-react-parser';
-import notFoundImg from '../../accets/not-found-img.jpg';
 
 const StyledImage = styled('img')({
   boxShadow: '10px 10px 13px 0px rgba(0,0,0,0.75)',
@@ -28,14 +33,17 @@ export const DetailsBook = () => {
   const { id } = useParams();
   const { loading, currentBook, error } = useSelector(selectDetails);
   const dispatch = useDispatch();
-  // const navigate = useNavigate();
 
   const parseText = (text) => {
-    if (!text) return 'No description ...';
+    if (!text) return 'No description ...'; // ??? typografy
     return parse(text);
   };
 
-  const parsedDescription = parseText(currentBook?.volumeInfo.description);
+  const image = currentBook?.volumeInfo.imageLinks?.thumbnail;
+  const categories = currentBook?.volumeInfo.categories?.[0];
+  const title = currentBook?.volumeInfo.title;
+  const authors = currentBook?.volumeInfo.authors?.join(', ');
+  const parsedDescription = parseText(currentBook?.volumeInfo.description); // used library html-react-parser
 
   useEffect(() => {
     dispatch(loadBookById(id));
@@ -85,7 +93,7 @@ export const DetailsBook = () => {
               }}
               component={RouterLink}
               to="/"
-              relative="path"
+              relative="path" // ????
               underline="none"
             >
               <ArrowBackIcon
@@ -94,13 +102,12 @@ export const DetailsBook = () => {
               />
               <Typography variant="h6">Go Back</Typography>
             </Link>
-            <StyledImage
-              src={currentBook?.volumeInfo.imageLinks?.thumbnail || notFoundImg}
-            />
+            <StyledImage sx={{ mb: '20px' }} src={image || notFoundImg} />
+            <FavouriteButton size="large" id={id} title={title} image={image} />
           </Box>
 
           <Box sx={{ p: '30px 40px 20px 0' }}>
-            <Typography>{currentBook?.volumeInfo.categories?.[0]}</Typography>
+            <Typography>{categories}</Typography>
             <Typography
               sx={{
                 m: '30px 0 5px',
@@ -109,10 +116,10 @@ export const DetailsBook = () => {
               variant="h4"
               component="h4"
             >
-              {currentBook?.volumeInfo.title}
+              {title}
             </Typography>
             <Typography sx={{ mb: '30px' }} variant="h6" component="h6">
-              {currentBook?.volumeInfo.authors?.join(', ')}
+              {authors}
             </Typography>
             <Typography variant="body1" component="p">
               {parsedDescription}

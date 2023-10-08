@@ -1,7 +1,7 @@
-import { CircularProgress, Container, Grid, Typography } from '@mui/material';
 import { useSelector } from 'react-redux';
 import { selectBooksAllInfo } from './books-slice';
 import { BookCard } from './BookCard';
+import { CircularProgress, Container, Grid, Typography } from '@mui/material';
 
 export const BooksList = () => {
   const { loading, entities, total, error } = useSelector(selectBooksAllInfo);
