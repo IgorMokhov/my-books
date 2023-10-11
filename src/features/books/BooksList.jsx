@@ -26,7 +26,7 @@ export const BooksList = () => {
           Nothing found
         </Typography>
       )}
-      {loading === 'pending' && <CircularProgress />}
+      {loading === 'pending' && <CircularProgress color="secondary" />}
       {loading === 'failed' && (
         <Typography variant="h5" component="h5">
           {`Error: ${error}`}

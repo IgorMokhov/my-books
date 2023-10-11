@@ -16,7 +16,7 @@ export const Sort = () => {
         sx={{
           pl: '10px',
           textAlign: 'left',
-          backgroundColor: 'white',
+          // backgroundColor: 'white',
           borderRadius: '20px',
         }}
         value={sort}

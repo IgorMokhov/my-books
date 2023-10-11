@@ -5,7 +5,7 @@ export const Navbar = () => {
   return (
     <Box sx={{ display: 'flex', ml: 'auto' }} component="nav">
       <Link
-        sx={{ fontWeight: '400', color: 'black' }}
+        sx={{ fontWeight: '400', color: 'inherit' }} // ?? color
         variant="h6"
         component={NavLink}
         to="/"
@@ -14,7 +14,7 @@ export const Navbar = () => {
         Home
       </Link>
       <Link
-        sx={{ fontWeight: '400', ml: '10px', color: 'black' }}
+        sx={{ fontWeight: '400', ml: '10px', color: 'inherit' }} // color ???
         variant="h6"
         component={NavLink}
         to="/about"

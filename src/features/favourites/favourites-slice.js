@@ -21,7 +21,6 @@ const favouritesSlice = createSlice({
     closeFavourites: (state) => {
       state.isOpen = false;
     },
-    clearFavourites: () => [],
   },
 });
 

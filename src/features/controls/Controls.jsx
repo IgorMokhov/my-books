@@ -1,8 +1,10 @@
 import { Search } from './Search';
 import { Category } from './Category';
 import { Sort } from './Sort';
+
+import backgroundImg from '../../accets/background-img.jpg';
+
 import { Box, Container, Paper, Typography } from '@mui/material';
-import backgroundImg from '../../accets/backgroundImg.jpg';
 
 export const Controls = () => {
   return (
@@ -20,7 +22,7 @@ export const Controls = () => {
     >
       <Container maxWidth="sm">
         <Typography
-          sx={{ color: 'white', fontWeight: '400', mb: '30px' }}
+          sx={{ fontWeight: '400', mb: '30px' }}
           variant="h2"
           component="h2"
         >

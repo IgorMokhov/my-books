@@ -19,7 +19,6 @@ export const BookCard = ({ image, title, authors, categories, id }) => {
       <Card
         sx={{
           maxWidth: 220,
-          backgroundColor: 'rgb(250, 250, 250)',
           transition: 'all 0.3s ease',
           '&:hover': { transform: 'translateY(-6px)' },
           position: 'relative',
@@ -45,7 +44,7 @@ export const BookCard = ({ image, title, authors, categories, id }) => {
 
           <CardContent
             sx={{
-              height: 90,
+              height: 120,
               p: '15px 10px',
               // position: 'relative',
             }}

@@ -56,7 +56,7 @@ export const DetailsBook = () => {
   return (
     <Container>
       {loading === 'pending' && (
-        <CircularProgress sx={{ textAlign: 'center' }} />
+        <CircularProgress sx={{ textAlign: 'center' }} color="secondary" />
       )}
 
       {loading === 'failed' && (
@@ -69,7 +69,6 @@ export const DetailsBook = () => {
         <Paper
           sx={{
             display: 'flex',
-            backgroundColor: 'rgb(250, 250, 250)',
             textAlign: 'left',
             mb: '15px',
           }}

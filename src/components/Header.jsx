@@ -1,3 +1,13 @@
+import { useDispatch, useSelector } from 'react-redux';
+
+import { Navbar } from './Navbar';
+import { ThemeSwitcher } from '../features/theme/ThemeSwitcher';
+
+import {
+  openFavourites,
+  selectQtyFavourites,
+} from '../features/favourites/favourites-slice';
+
 import { MenuBook } from '@mui/icons-material';
 import {
   AppBar,
@@ -7,32 +17,22 @@ import {
   Toolbar,
   Typography,
 } from '@mui/material';
-import { Navbar } from './Navbar';
-import { useDispatch, useSelector } from 'react-redux';
-import {
-  openFavourites,
-  selectQtyFavourites,
-} from '../features/favourites/favourites-slice';
 
 export const Header = () => {
   const favouritesQty = useSelector(selectQtyFavourites);
   const dispatch = useDispatch();
 
   return (
-    <AppBar
-      sx={{ backgroundColor: 'white', color: 'inherit' }}
-      position="static"
-    >
+    <AppBar position="static">
       <Container>
         <Toolbar>
-          <Typography sx={{}} variant="h4" component="span">
+          <Typography variant="h4" component="span">
             My Books
           </Typography>
 
           <Navbar />
 
           <IconButton
-            color="inherit"
             onClick={() => dispatch(openFavourites())}
             sx={{ ml: '10px' }}
           >
@@ -40,6 +40,7 @@ export const Header = () => {
               <MenuBook />
             </Badge>
           </IconButton>
+          <ThemeSwitcher />
         </Toolbar>
       </Container>
     </AppBar>

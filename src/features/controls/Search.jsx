@@ -1,12 +1,18 @@
+import { useDispatch, useSelector } from 'react-redux';
+
+import { loadBooks, selectError, setError } from '../books/books-slice';
+import { selectControls, setSearch } from './controls-slice';
+import { selectTheme } from '../theme/theme-slice';
+
+import { darkModeColors, lightModeColors } from '../../themeConfig';
+
 import { Box, IconButton, InputBase } from '@mui/material';
 import SearchIcon from '@mui/icons-material/Search';
-import { useDispatch, useSelector } from 'react-redux';
-import { selectControls, setSearch } from './controls-slice';
-import { loadBooks, selectError, setError } from '../books/books-slice';
 
 export const Search = () => {
   const { search, category, sort } = useSelector(selectControls);
   const error = useSelector(selectError);
+  const theme = useSelector(selectTheme);
   const dispatch = useDispatch();
 
   const searchSubmitHandler = (event) => {
@@ -26,7 +32,11 @@ export const Search = () => {
     <Box
       component="form"
       sx={{
-        backgroundColor: 'white',
+        backgroundColor:
+          theme === 'light'
+            ? lightModeColors.primary
+            : darkModeColors.primaryBackground,
+        boxShadow: '0px 0px 10px 0px rgba(0,0,0,0.75)',
         borderRadius: '20px',
         display: 'flex',
         mb: '20px',

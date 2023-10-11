@@ -1,6 +1,6 @@
-import { FormControl, InputLabel, MenuItem, Select } from '@mui/material';
 import { useDispatch, useSelector } from 'react-redux';
 import { selectCategory, setCategory } from './controls-slice';
+import { FormControl, MenuItem, Select } from '@mui/material';
 
 export const Category = () => {
   const category = useSelector(selectCategory);
@@ -16,7 +16,6 @@ export const Category = () => {
         sx={{
           pl: '10px',
           textAlign: 'left',
-          backgroundColor: 'white',
           borderRadius: '20px',
         }}
         value={category}
