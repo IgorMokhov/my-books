@@ -6,7 +6,7 @@ import { detailsReducer } from './features/details/details-slice';
 import { FavouritesReducer } from './features/favourites/favourites-slice';
 import { themeReducer } from './features/theme/theme-slice';
 
-import * as api from './config';
+import * as api from './apiConfig';
 
 export const store = configureStore({
   reducer: {

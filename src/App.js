@@ -18,12 +18,10 @@ import { NotFoundPage } from './pages/NotFoundPage';
 import { ThemeProvider, createTheme } from '@mui/material/styles';
 import CssBaseline from '@mui/material/CssBaseline';
 
-
 import { getDesignTokens } from './themeConfig';
 import './App.css';
 
-
-function App() {
+const App = () =>  {
   const mode = useSelector(selectTheme);
   const theme = useMemo(() => createTheme(getDesignTokens(mode)), [mode]);
 
@@ -47,6 +45,6 @@ function App() {
       </ThemeProvider>
     </div>
   );
-}
+};
 
 export default App;

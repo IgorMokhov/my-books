@@ -14,7 +14,7 @@ export const darkModeColors = {
 
 export const getDesignTokens = (mode) => ({
   palette: {
-    mode, // light / dark
+    mode,
     ...(mode === 'light'
       ? {
           // palette values for light mode
@@ -59,7 +59,6 @@ export const getDesignTokens = (mode) => ({
       },
     },
   },
-
   typography: {
     fontFamily: 'Poppins, sans-serif',
   },

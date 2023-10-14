@@ -1,10 +1,22 @@
-import { useSelector } from 'react-redux';
-import { selectBooksAllInfo } from './books-slice';
+import { useDispatch, useSelector } from 'react-redux';
+
+import { loadMoreBooks, selectBooksAllInfo } from './books-slice';
+import { selectControls } from '../controls/controls-slice';
+import { selectTheme } from '../theme/theme-slice';
 import { BookCard } from './BookCard';
+import { darkModeColors, lightModeColors } from '../../themeConfig';
+
 import { CircularProgress, Container, Grid, Typography } from '@mui/material';
+import LoadingButton from '@mui/lab/LoadingButton';
 
 export const BooksList = () => {
-  const { loading, entities, total, error } = useSelector(selectBooksAllInfo);
+  const { loading, loadingButton, entities, total, error, page } =
+    useSelector(selectBooksAllInfo);
+  const { search, category, sort } = useSelector(selectControls);
+  const theme = useSelector(selectTheme);
+  const dispatch = useDispatch();
+
+  console.log(theme);
 
   return (
     <Container>
@@ -17,6 +29,7 @@ export const BooksList = () => {
           {`Found ${total} ${total > 1 ? 'books' : 'book'}`}
         </Typography>
       )}
+
       {total === 0 && (
         <Typography
           sx={{ mb: '20px', fontWeight: '400' }}
@@ -26,14 +39,16 @@ export const BooksList = () => {
           Nothing found
         </Typography>
       )}
+
       {loading === 'pending' && <CircularProgress color="secondary" />}
+
       {loading === 'failed' && (
         <Typography variant="h5" component="h5">
           {`Error: ${error}`}
         </Typography>
       )}
 
-      <Grid container spacing={2}>
+      <Grid sx={{ mb: '40px' }} container spacing={2}>
         {loading === 'succeeded' &&
           entities?.map((book) => (
             <BookCard
@@ -46,6 +61,29 @@ export const BooksList = () => {
             />
           ))}
       </Grid>
+
+      {!!total && (
+        <LoadingButton
+          sx={{
+            mb: '40px',
+            // color: 'black',
+            backgroundColor:
+              theme === 'light'
+                ? lightModeColors.backgroundPaper
+                : darkModeColors.backgroundPaper,
+            // '&:hover': {
+            //   backgroundColor: 'lightgray',
+            // },
+          }}
+          variant="contained"
+          loading={loadingButton}
+          onClick={() =>
+            dispatch(loadMoreBooks({ search, category, sort, page }))
+          }
+        >
+          More books
+        </LoadingButton>
+      )}
     </Container>
   );
 };

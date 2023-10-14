@@ -1,5 +1,4 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
-import axios from 'axios';
 
 export const loadBooks = createAsyncThunk(
   '@@books/loadBooks',
@@ -7,23 +6,28 @@ export const loadBooks = createAsyncThunk(
     { search = '', category = '', sort = 'relevance' },
     { extra: api }
   ) => {
-    const selectedCategory = category === 'all' ? '' : category; // ????????
+    const response = await api.loadData({ search, category, sort });
+    return response;
+  }
+);
 
-    try {
-      const response = await axios.get(
-        `${api.BASE_URL}?q=${search}+subject:${selectedCategory}&orderBy=${sort}&maxResults=${api.MAX_RESULTS}&key=${api.API_KEY}`
-      );
-      return response.data;
-    } catch (error) {
-      throw new Error(error.message);
-    }
+export const loadMoreBooks = createAsyncThunk(
+  '@@books/loadMoreBooks',
+  async (
+    { search = '', category = '', sort = 'relevance', page = 0 },
+    { extra: api }
+  ) => {
+    const response = await api.loadData({ search, category, sort, page });
+    return response;
   }
 );
 
 const initialState = {
   loading: 'idle', // pending / succeeded  / failed
+  loadingButton: false,
   entities: [],
   total: null,
+  page: 0,
   error: null,
 };
 
@@ -41,17 +45,31 @@ export const booksSlice = createSlice({
         state.loading = 'pending';
         state.entities = [];
         state.total = null;
+        state.page = 0;
         state.error = null;
       })
       .addCase(loadBooks.fulfilled, (state, action) => {
         state.loading = 'succeeded';
         state.entities = action.payload.items;
         state.total = action.payload.totalItems;
+        state.page = state.page + 1;
         state.error = null;
       })
       .addCase(loadBooks.rejected, (state, action) => {
         state.loading = 'failed';
         state.error = action.error.message;
+      })
+      .addCase(loadMoreBooks.pending, (state) => {
+        state.loadingButton = true;
+      })
+      .addCase(loadMoreBooks.fulfilled, (state, action) => {
+        state.entities = state.entities.concat(action.payload.items);
+        state.page = state.page + 1;
+        state.loadingButton = false;
+      })
+      .addCase(loadMoreBooks.rejected, (state, action) => {
+        state.error = action.error.message;
+        state.loadingButton = false;
       });
   },
 });
