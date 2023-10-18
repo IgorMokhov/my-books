@@ -4,6 +4,7 @@ import {
   deleteBook,
   selectFavourites,
 } from '../features/favourites/favourites-slice';
+import { openSnack } from '../features/snack/snack-slice';
 
 import { IconButton, Tooltip } from '@mui/material';
 import { BookmarkAdd, BookmarkAdded } from '@mui/icons-material';
@@ -18,8 +19,14 @@ export const FavouriteButton = ({ id, title, image, size }) => {
     event.preventDefault();
 
     if (isFavourite) {
+      dispatch(
+        openSnack({ message: 'Remove from favourites!', variant: 'info' })
+      );
       dispatch(deleteBook(id));
     } else {
+      dispatch(
+        openSnack({ message: 'Added to favourites!', variant: 'success' })
+      );
       dispatch(addBook({ id, title, image }));
     }
   };

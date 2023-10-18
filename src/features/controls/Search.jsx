@@ -1,8 +1,9 @@
 import { useDispatch, useSelector } from 'react-redux';
 
-import { loadBooks, selectError, setError } from '../books/books-slice';
+import { loadBooks } from '../books/books-slice';
 import { selectControls, setSearch } from './controls-slice';
 import { selectTheme } from '../theme/theme-slice';
+import { openSnack } from '../snack/snack-slice';
 
 import { darkModeColors, lightModeColors } from '../../themeConfig';
 
@@ -11,7 +12,6 @@ import SearchIcon from '@mui/icons-material/Search';
 
 export const Search = () => {
   const { search, category, sort } = useSelector(selectControls);
-  const error = useSelector(selectError);
   const theme = useSelector(selectTheme);
   const dispatch = useDispatch();
 
@@ -19,7 +19,7 @@ export const Search = () => {
     event.preventDefault();
 
     if (!search.trim()) {
-      dispatch(setError('search is empty'));
+      dispatch(openSnack({ message: 'Search is empty!', variant: 'error' }));
       return;
     }
 
@@ -51,11 +51,7 @@ export const Search = () => {
         }}
         type="text"
         fullWidth
-        placeholder={
-          error === 'search is empty'
-            ? 'Please enter something ...'
-            : 'Search ...'
-        }
+        placeholder="Search ..."
         value={search}
         onChange={onChangeHandler}
       />

@@ -7,6 +7,7 @@ import { FavouritesReducer } from './features/favourites/favourites-slice';
 import { themeReducer } from './features/theme/theme-slice';
 
 import * as api from './apiConfig';
+import { snackReducer } from './features/snack/snack-slice';
 
 export const store = configureStore({
   reducer: {
@@ -15,6 +16,7 @@ export const store = configureStore({
     details: detailsReducer,
     favourites: FavouritesReducer,
     theme: themeReducer,
+    snack: snackReducer,
   },
   devTools: true,
   middleware: (getDefaultMiddleware) =>

@@ -10,7 +10,7 @@ export const Controls = () => {
   return (
     <Paper
       sx={{
-        height: '350px',
+        height: '450px',
         pt: '100px',
         mb: '15px',
         backgroundImage: `url(${backgroundImg})`,
@@ -22,7 +22,7 @@ export const Controls = () => {
     >
       <Container maxWidth="sm">
         <Typography
-          sx={{ fontWeight: '400', mb: '30px' }}
+          sx={{ fontWeight: '400', mb: '60px', color: 'white' }}
           variant="h2"
           component="h2"
         >

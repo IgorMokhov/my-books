@@ -1,5 +1,5 @@
-import { Box, Link } from '@mui/material';
 import { NavLink } from 'react-router-dom';
+import { Box, Link } from '@mui/material';
 
 export const Navbar = () => {
   return (

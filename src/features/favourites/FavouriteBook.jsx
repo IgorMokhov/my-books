@@ -1,6 +1,7 @@
-import { Close } from '@mui/icons-material';
 import { closeFavourites, deleteBook } from './favourites-slice';
+import { openSnack } from '../snack/snack-slice';
 
+import { Close } from '@mui/icons-material';
 import {
   Avatar,
   Divider,
@@ -21,6 +22,9 @@ export const FavouriteBook = ({ id, title, image, navigate, dispatch }) => {
   const deleteHandler = (event) => {
     event.stopPropagation();
     dispatch(deleteBook(id));
+    dispatch(
+      openSnack({ message: 'Remove from favourites!', variant: 'info' })
+    );
   };
 
   return (

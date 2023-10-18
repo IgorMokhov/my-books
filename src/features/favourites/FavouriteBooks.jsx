@@ -36,12 +36,11 @@ export const FavouriteBooks = () => {
       <List disablePadding sx={{ width: '350px' }}>
         <ListItem>
           <ListItemIcon>
-            <IconButton sx={{ ml: '-6px  ' }}>
-              <ArrowBack
-                sx={{ cursor: 'pointer' }}
-                fontSize="large"
-                onClick={() => dispatch(closeFavourites())}
-              />
+            <IconButton
+              sx={{ ml: '-6px  ' }}
+              onClick={() => dispatch(closeFavourites())}
+            >
+              <ArrowBack sx={{ cursor: 'pointer' }} fontSize="large" />
             </IconButton>
           </ListItemIcon>
           <ListItemText

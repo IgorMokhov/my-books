@@ -2,10 +2,10 @@ import { useMemo } from 'react';
 import { Route, Routes } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 
-import { selectTheme } from './features/theme/theme-slice';
-
 import { Header } from './components/Header';
 import { Main } from './components/Main';
+import { Footer } from './components/Footer';
+import { Snack } from './features/snack/Snack';
 
 import { Controls } from './features/controls/Controls';
 import { FavouriteBooks } from './features/favourites/FavouriteBooks';
@@ -18,10 +18,11 @@ import { NotFoundPage } from './pages/NotFoundPage';
 import { ThemeProvider, createTheme } from '@mui/material/styles';
 import CssBaseline from '@mui/material/CssBaseline';
 
+import { selectTheme } from './features/theme/theme-slice';
 import { getDesignTokens } from './themeConfig';
 import './App.css';
 
-const App = () =>  {
+const App = () => {
   const mode = useSelector(selectTheme);
   const theme = useMemo(() => createTheme(getDesignTokens(mode)), [mode]);
 
@@ -40,8 +41,10 @@ const App = () =>  {
             <Route path="*" element={<NotFoundPage />} />
           </Routes>
         </Main>
+        <Footer />
 
         <FavouriteBooks />
+        <Snack />
       </ThemeProvider>
     </div>
   );

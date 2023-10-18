@@ -1,6 +1,6 @@
 import { useDispatch, useSelector } from 'react-redux';
 
-import { loadMoreBooks, selectBooksAllInfo } from './books-slice';
+import { loadMoreBooks, selectBooksAllInfo, setError } from './books-slice';
 import { selectControls } from '../controls/controls-slice';
 import { selectTheme } from '../theme/theme-slice';
 import { BookCard } from './BookCard';
@@ -8,6 +8,8 @@ import { darkModeColors, lightModeColors } from '../../themeConfig';
 
 import { CircularProgress, Container, Grid, Typography } from '@mui/material';
 import LoadingButton from '@mui/lab/LoadingButton';
+import { openSnack } from '../snack/snack-slice';
+import { useEffect } from 'react';
 
 export const BooksList = () => {
   const { loading, loadingButton, entities, total, error, page } =
@@ -16,7 +18,11 @@ export const BooksList = () => {
   const theme = useSelector(selectTheme);
   const dispatch = useDispatch();
 
-  console.log(theme);
+  useEffect(() => {
+    if (loading === 'failed') {
+      dispatch(openSnack({ message: error, variant: 'error' }));
+    }
+  }, [loading, dispatch]);
 
   return (
     <Container>
@@ -41,12 +47,6 @@ export const BooksList = () => {
       )}
 
       {loading === 'pending' && <CircularProgress color="secondary" />}
-
-      {loading === 'failed' && (
-        <Typography variant="h5" component="h5">
-          {`Error: ${error}`}
-        </Typography>
-      )}
 
       <Grid sx={{ mb: '40px' }} container spacing={2}>
         {loading === 'succeeded' &&
