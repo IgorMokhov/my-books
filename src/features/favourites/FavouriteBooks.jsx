@@ -9,7 +9,7 @@ import {
   selectIsOpenFavourites,
 } from './favourites-slice';
 
-import { ArrowBack, Close, CollectionsBookmark } from '@mui/icons-material';
+import { ArrowBack } from '@mui/icons-material';
 import {
   Divider,
   Drawer,
@@ -65,6 +65,7 @@ export const FavouriteBooks = () => {
           FavouriteBooks.map((book) => (
             <>
               <FavouriteBook
+                key={book.id}
                 id={book.id}
                 title={book.title}
                 image={book.image || notFoundImg}

@@ -1,6 +1,6 @@
 import { useDispatch, useSelector } from 'react-redux';
 
-import { loadMoreBooks, selectBooksAllInfo, setError } from './books-slice';
+import { loadMoreBooks, selectBooksAllInfo } from './books-slice';
 import { selectControls } from '../controls/controls-slice';
 import { selectTheme } from '../theme/theme-slice';
 import { BookCard } from './BookCard';
@@ -22,7 +22,7 @@ export const BooksList = () => {
     if (loading === 'failed') {
       dispatch(openSnack({ message: error, variant: 'error' }));
     }
-  }, [loading, dispatch]);
+  }, [loading, error, dispatch]);
 
   return (
     <Container>

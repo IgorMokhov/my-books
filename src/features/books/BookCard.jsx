@@ -9,7 +9,6 @@ import {
   CardMedia,
   Grid,
   Link,
-  Tooltip,
   Typography,
 } from '@mui/material';
 
