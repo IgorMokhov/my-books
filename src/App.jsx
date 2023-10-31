@@ -5,7 +5,6 @@ import { useSelector } from 'react-redux';
 import { Header } from './components/Header';
 import { Main } from './components/Main';
 import { Footer } from './components/Footer';
-import { Snack } from './features/snack/Snack';
 
 import { Controls } from './features/controls/Controls';
 import { FavouriteBooks } from './features/favourites/FavouriteBooks';
@@ -44,7 +43,6 @@ const App = () => {
         <Footer />
 
         <FavouriteBooks />
-        <Snack />
       </ThemeProvider>
     </div>
   );

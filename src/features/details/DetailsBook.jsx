@@ -34,9 +34,10 @@ export const DetailsBook = () => {
   const { loading, currentBook, error } = useSelector(selectDetails);
   const dispatch = useDispatch();
 
-  const parseText = (text) => {
-    if (!text) return 'No description ...'; // ??? typografy
-    return parse(text);
+  const parseText = (html) => {
+    if (!html) return 'No description ...';
+
+    return parse(html);
   };
 
   const image = currentBook?.volumeInfo.imageLinks?.thumbnail;
@@ -120,9 +121,7 @@ export const DetailsBook = () => {
             <Typography sx={{ mb: '30px' }} variant="h6" component="h6">
               {authors}
             </Typography>
-            <Typography variant="body1" component="p">
-              {parsedDescription}
-            </Typography>
+            <Box>{parsedDescription}</Box>
           </Box>
         </Paper>
       )}

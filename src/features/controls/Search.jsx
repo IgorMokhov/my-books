@@ -1,29 +1,33 @@
+import { useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 
 import { loadBooks } from '../books/books-slice';
 import { selectControls, setSearch } from './controls-slice';
 import { selectTheme } from '../theme/theme-slice';
-import { openSnack } from '../snack/snack-slice';
 
 import { darkModeColors, lightModeColors } from '../../themeConfig';
 
 import { Box, IconButton, InputBase } from '@mui/material';
 import SearchIcon from '@mui/icons-material/Search';
+import { useCustomSnackbar } from '../../utils/useCustomSnackbar';
 
 export const Search = () => {
   const { search, category, sort } = useSelector(selectControls);
   const theme = useSelector(selectTheme);
+  const showSnackbar = useCustomSnackbar();
   const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   const searchSubmitHandler = (event) => {
     event.preventDefault();
 
     if (!search.trim()) {
-      dispatch(openSnack({ message: 'Search is empty!', variant: 'error' }));
+      showSnackbar('Search is empty!', 'error');
       return;
     }
 
     dispatch(loadBooks({ search, category, sort }));
+    navigate('/');
   };
 
   const onChangeHandler = (event) => dispatch(setSearch(event.target.value));

@@ -63,16 +63,14 @@ export const FavouriteBooks = () => {
           </ListItem>
         ) : (
           FavouriteBooks.map((book) => (
-            <>
-              <FavouriteBook
-                key={book.id}
-                id={book.id}
-                title={book.title}
-                image={book.image || notFoundImg}
-                navigate={navigate}
-                dispatch={dispatch}
-              />
-            </>
+            <FavouriteBook
+              key={book.id}
+              id={book.id}
+              title={book.title}
+              image={book.image || notFoundImg}
+              navigate={navigate}
+              dispatch={dispatch}
+            />
           ))
         )}
       </List>

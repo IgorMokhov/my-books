@@ -1,5 +1,5 @@
 import { closeFavourites, deleteBook } from './favourites-slice';
-import { openSnack } from '../snack/snack-slice';
+import { useCustomSnackbar } from '../../utils/useCustomSnackbar';
 
 import { Close } from '@mui/icons-material';
 import {
@@ -14,7 +14,9 @@ import {
 } from '@mui/material';
 
 export const FavouriteBook = ({ id, title, image, navigate, dispatch }) => {
-  const closeHandler = () => {
+  const showSnackbar = useCustomSnackbar();
+
+  const clickHandler = () => {
     dispatch(closeFavourites());
     navigate(`/books/${id}`);
   };
@@ -22,15 +24,13 @@ export const FavouriteBook = ({ id, title, image, navigate, dispatch }) => {
   const deleteHandler = (event) => {
     event.stopPropagation();
     dispatch(deleteBook(id));
-    dispatch(
-      openSnack({ message: 'Remove from favourites!', variant: 'info' })
-    );
+    showSnackbar('Removed from favourites!', 'info')
   };
 
   return (
     <>
       <ListItem sx={{ p: '0' }}>
-        <ListItemButton onClick={closeHandler}>
+        <ListItemButton onClick={clickHandler}>
           <ListItemAvatar>
             <Avatar alt={title} src={image} />
           </ListItemAvatar>

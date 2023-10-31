@@ -5,7 +5,6 @@ import { booksReducer } from './features/books/books-slice';
 import { detailsReducer } from './features/details/details-slice';
 import { FavouritesReducer } from './features/favourites/favourites-slice';
 import { themeReducer } from './features/theme/theme-slice';
-import { snackReducer } from './features/snack/snack-slice';
 
 import * as api from './apiConfig';
 
@@ -21,20 +20,17 @@ import {
 } from 'redux-persist';
 import storage from 'redux-persist/lib/storage';
 
-
 const rootReducer = combineReducers({
   controls: controlsReducer,
   books: booksReducer,
   details: detailsReducer,
   favourites: FavouritesReducer,
   theme: themeReducer,
-  snack: snackReducer,
 });
 
 const persistConfig = {
   key: 'root',
   storage,
-  blacklist: ['snack'],
 };
 
 const persistedReducer = persistReducer(persistConfig, rootReducer);

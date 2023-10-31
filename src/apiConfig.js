@@ -10,7 +10,7 @@ export const loadData = async ({
   sort = 'relevance',
   page = 0,
 }) => {
-  const selectedCategory = category === 'all' ? '' : category; 
+  const selectedCategory = category === 'all' ? '' : category;
   const startIndex = page * MAX_RESULTS;
 
   try {

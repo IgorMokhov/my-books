@@ -38,6 +38,7 @@ export const booksSlice = createSlice({
     setError: (state, action) => {
       state.error = action.payload;
     },
+    clearBooks: () => initialState,
   },
   extraReducers: (builder) => {
     builder
@@ -74,7 +75,7 @@ export const booksSlice = createSlice({
   },
 });
 
-export const { setError } = booksSlice.actions;
+export const { setError, clearBooks } = booksSlice.actions;
 export const booksReducer = booksSlice.reducer;
 
 // selectors
