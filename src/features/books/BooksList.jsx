@@ -6,6 +6,7 @@ import { clearBooks, loadMoreBooks, selectBooksAllInfo } from './books-slice';
 import { selectControls } from '../controls/controls-slice';
 import { selectTheme } from '../theme/theme-slice';
 import { darkModeColors, lightModeColors } from '../../themeConfig';
+import { MAX_RESULTS } from '../../apiConfig';
 
 import {
   Box,
@@ -27,6 +28,8 @@ export const BooksList = () => {
   const theme = useSelector(selectTheme);
   const showSnackbar = useCustomSnackbar();
   const dispatch = useDispatch();
+
+  const possibleQtyBooks = MAX_RESULTS * (page + 1);
 
   const clearHandler = () => {
     dispatch(clearBooks());
@@ -99,6 +102,7 @@ export const BooksList = () => {
           }}
           variant="contained"
           loading={loadingButton}
+          disabled={possibleQtyBooks}
           onClick={() =>
             dispatch(loadMoreBooks({ search, category, sort, page }))
           }

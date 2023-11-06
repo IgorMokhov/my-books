@@ -22,3 +22,5 @@ export const loadData = async ({
     throw new Error(error.message);
   }
 };
+
+export const loadDetailsData = () => {}; // ??

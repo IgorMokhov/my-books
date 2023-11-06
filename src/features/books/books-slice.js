@@ -2,10 +2,7 @@ import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 
 export const loadBooks = createAsyncThunk(
   '@@books/loadBooks',
-  async (
-    { search = '', category = '', sort = 'relevance' },
-    { extra: api }
-  ) => {
+  async ({ search, category, sort }, { extra: api }) => {
     const response = await api.loadData({ search, category, sort });
     return response;
   }
@@ -13,14 +10,17 @@ export const loadBooks = createAsyncThunk(
 
 export const loadMoreBooks = createAsyncThunk(
   '@@books/loadMoreBooks',
-  async (
-    { search = '', category = '', sort = 'relevance', page = 0 },
-    { extra: api }
-  ) => {
+  async ({ search, category, sort, page }, { extra: api }) => {
     const response = await api.loadData({ search, category, sort, page });
     return response;
   }
 );
+
+const checkUniqueItems = (state, loadedItems) => {
+  const uniqueIds = new Set(state.entities.map((item) => item.id));
+  const filteredItems = loadedItems.filter((item) => !uniqueIds.has(item.id));
+  return state.entities.concat(filteredItems);
+};
 
 const initialState = {
   loading: 'idle', // pending / succeeded  / failed
@@ -64,7 +64,7 @@ export const booksSlice = createSlice({
         state.loadingButton = true;
       })
       .addCase(loadMoreBooks.fulfilled, (state, action) => {
-        state.entities = state.entities.concat(action.payload.items);
+        state.entities = checkUniqueItems(state, action.payload.items || []);
         state.page = state.page + 1;
         state.loadingButton = false;
       })
