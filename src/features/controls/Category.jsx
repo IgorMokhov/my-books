@@ -11,7 +11,16 @@ export const Category = () => {
   };
 
   return (
-    <FormControl sx={{ width: '250px' }} size="small">
+    <FormControl
+      sx={{
+        width: '300px',
+        mb: '20px',
+        '@media (max-width: 720px)': {
+          width: '100%',
+        },
+      }}
+      size="small"
+    >
       <Select
         sx={{
           pl: '10px',

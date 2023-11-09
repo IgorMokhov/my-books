@@ -9,14 +9,7 @@ import {
 } from '../features/favourites/favourites-slice';
 
 import { MenuBook } from '@mui/icons-material';
-import {
-  AppBar,
-  Badge,
-  Container,
-  IconButton,
-  Toolbar,
-  Typography,
-} from '@mui/material';
+import { AppBar, Badge, Container, IconButton, Toolbar } from '@mui/material';
 
 export const Header = () => {
   const favouritesQty = useSelector(selectQtyFavourites);
@@ -24,17 +17,21 @@ export const Header = () => {
 
   return (
     <AppBar position="static">
-      <Container>
-        <Toolbar>
-          <Typography variant="h4" component="span">
-            My Books
-          </Typography>
-
+      <Container maxWidth="lg">
+        <Toolbar
+          sx={{
+            '@media (max-width: 420px)': {
+              p: 0,
+            },
+          }}
+        >
           <Navbar />
 
           <IconButton
             onClick={() => dispatch(openFavourites())}
-            sx={{ ml: '10px' }}
+            sx={{
+              ml: '10px',
+            }}
           >
             <Badge badgeContent={favouritesQty} color="secondary">
               <MenuBook />

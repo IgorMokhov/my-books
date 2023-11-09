@@ -55,11 +55,18 @@ export const DetailsBook = () => {
   }, [id, dispatch]);
 
   return (
-    <Container>
+    <Container
+      sx={{
+        '@media (max-width: 720px)': {
+          p: '10px',
+        },
+      }}
+    >
       {loading === 'pending' && (
         <CircularProgress sx={{ textAlign: 'center' }} color="secondary" />
       )}
 
+      {/* заменить на снек бар?? */}
       {loading === 'failed' && (
         <Typography variant="h5" component="h5">
           {`Error: ${error}`}
@@ -72,16 +79,27 @@ export const DetailsBook = () => {
             display: 'flex',
             textAlign: 'left',
             mb: '15px',
+            position: 'relative',
+            '@media (max-width: 960px)': {
+              flexDirection: 'column',
+              textAlign: 'center',
+            },
+            '@media (max-width: 720px)': {
+              margin: 0,
+            },
           }}
         >
           <Box
             sx={{
               p: '0 50px 50px 50px',
+              '@media (max-width: 960px)': {
+                p: 0,
+              },
             }}
           >
             <Link
               sx={{
-                m: '30px 0',
+                m: '27px 0',
                 color: 'inherit',
                 display: 'flex',
                 minWidth: 130,
@@ -89,6 +107,9 @@ export const DetailsBook = () => {
                   '& svg': {
                     transform: 'translateX(-5px)',
                   },
+                },
+                '@media (max-width: 960px)': {
+                  ml: '20px',
                 },
               }}
               component={RouterLink}
@@ -100,25 +121,62 @@ export const DetailsBook = () => {
                 sx={{ pr: '3px', transition: 'transform 0.3s' }}
                 fontSize="large"
               />
-              <Typography variant="h6">Go Back</Typography>
+              <Typography variant="h6" component="span">
+                Go Back
+              </Typography>
             </Link>
             <StyledImage sx={{ mb: '20px' }} src={image || notFoundImg} />
-            <FavouriteButton size="large" id={id} title={title} image={image} />
+            <Box
+              sx={{
+                position: 'absolute',
+                right: '15px',
+                top: '15px',
+              }}
+            >
+              <FavouriteButton
+                size="large"
+                id={id}
+                title={title}
+                image={image}
+              />
+            </Box>
           </Box>
 
-          <Box sx={{ p: '30px 40px 20px 0' }}>
+          <Box
+            sx={{
+              p: '30px 40px 20px 0',
+              '@media (max-width: 960px)': {
+                p: '10px',
+              },
+            }}
+          >
             <Typography>{categories}</Typography>
             <Typography
               sx={{
                 m: '30px 0 5px',
                 fontWeight: 500,
+                '@media (max-width: 720px)': {
+                  fontSize: '27px',
+                  m: '15px 0 5px',
+                },
               }}
               variant="h4"
               component="h4"
             >
               {title}
             </Typography>
-            <Typography sx={{ mb: '30px' }} variant="h6" component="h6">
+            <Typography
+              sx={{
+                mb: '30px',
+                '@media (max-width: 720px)': {
+                  mb: '10px',
+                  lineHeight: '1.3',
+                  fontSize: '18px',
+                },
+              }}
+              variant="h6"
+              component="h6"
+            >
               {authors}
             </Typography>
             <Box>{parsedDescription}</Box>

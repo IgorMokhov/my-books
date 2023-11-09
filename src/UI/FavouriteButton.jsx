@@ -6,7 +6,10 @@ import {
 } from '../features/favourites/favourites-slice';
 
 import { IconButton, Tooltip } from '@mui/material';
-import { BookmarkAdd, BookmarkAdded } from '@mui/icons-material';
+import {
+  BookmarkAddOutlined,
+  BookmarkAddedOutlined,
+} from '@mui/icons-material';
 import { useCustomSnackbar } from '../utils/useCustomSnackbar';
 
 export const FavouriteButton = ({ id, title, image, size }) => {
@@ -35,9 +38,9 @@ export const FavouriteButton = ({ id, title, image, size }) => {
     >
       <IconButton onClick={handleButtonClick}>
         {isFavourite ? (
-          <BookmarkAdded fontSize={size} color="secondary" />
+          <BookmarkAddedOutlined fontSize={size} color="secondary" />
         ) : (
-          <BookmarkAdd fontSize={size} />
+          <BookmarkAddOutlined fontSize={size} />
         )}
       </IconButton>
     </Tooltip>

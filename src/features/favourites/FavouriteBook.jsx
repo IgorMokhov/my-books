@@ -24,7 +24,7 @@ export const FavouriteBook = ({ id, title, image, navigate, dispatch }) => {
   const deleteHandler = (event) => {
     event.stopPropagation();
     dispatch(deleteBook(id));
-    showSnackbar('Removed from favourites!', 'info')
+    showSnackbar('Removed from favourites!', 'info');
   };
 
   return (
@@ -35,7 +35,7 @@ export const FavouriteBook = ({ id, title, image, navigate, dispatch }) => {
             <Avatar alt={title} src={image} />
           </ListItemAvatar>
           <ListItemText
-            primary={title.length > 40 ? `${title.slice(0, 40)}...` : title}
+            primary={title.length > 38 ? `${title.slice(0, 38)}...` : title}
           />
           <ListItemIcon sx={{ justifyContent: 'flex-end' }}>
             <IconButton onClick={deleteHandler}>

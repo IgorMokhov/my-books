@@ -33,7 +33,7 @@ export const FavouriteBooks = () => {
       open={isOpenFavourites}
       onClose={() => dispatch(closeFavourites())}
     >
-      <List disablePadding sx={{ width: '350px' }}>
+      <List disablePadding sx={{ width: '320px' }}>
         <ListItem>
           <ListItemIcon>
             <IconButton
@@ -44,11 +44,7 @@ export const FavouriteBooks = () => {
             </IconButton>
           </ListItemIcon>
           <ListItemText
-            primary={
-              <Typography sx={{ ml: '15px' }} variant="h6">
-                My Favourite Books
-              </Typography>
-            }
+            primary={<Typography variant="h6">My Favourite Books</Typography>}
           />
         </ListItem>
 

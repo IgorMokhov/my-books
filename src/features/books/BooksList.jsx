@@ -6,7 +6,7 @@ import { clearBooks, loadMoreBooks, selectBooksAllInfo } from './books-slice';
 import { selectControls } from '../controls/controls-slice';
 import { selectTheme } from '../theme/theme-slice';
 import { darkModeColors, lightModeColors } from '../../themeConfig';
-import { MAX_RESULTS } from '../../apiConfig';
+// import { MAX_RESULTS } from '../../apiConfig';
 
 import {
   Box,
@@ -29,7 +29,7 @@ export const BooksList = () => {
   const showSnackbar = useCustomSnackbar();
   const dispatch = useDispatch();
 
-  const possibleQtyBooks = MAX_RESULTS * (page + 1);
+  // const possibleQtyBooks = MAX_RESULTS * (page + 1);
 
   const clearHandler = () => {
     dispatch(clearBooks());
@@ -43,18 +43,18 @@ export const BooksList = () => {
   }, [loading, error, dispatch, showSnackbar]);
 
   return (
-    <Container>
+    <Container maxWidth="lg">
       {total > 0 && (
         <Box sx={{ mb: '20px' }}>
           <Typography
-            sx={{ fontWeight: '400', mr: '10px' }}
+            sx={{ fontWeight: '400', mr: '5px' }}
             variant="h6"
             component="span"
           >
             {`Found ${total} ${total > 1 ? 'books' : 'book'}`}
           </Typography>
           <Tooltip title="Clear all books" placement="right">
-            <IconButton onClick={clearHandler}>
+            <IconButton sx={{ mb: '5px' }} onClick={clearHandler}>
               <DeleteIcon />
             </IconButton>
           </Tooltip>
@@ -73,7 +73,7 @@ export const BooksList = () => {
 
       {loading === 'pending' && <CircularProgress color="secondary" />}
 
-      <Grid sx={{ mb: '40px' }} container spacing={2}>
+      <Grid sx={{ mb: '40px' }} container rowSpacing={3} columnSpacing={2}>
         {loading === 'succeeded' &&
           entities?.map((book) => (
             <BookCard
@@ -102,7 +102,6 @@ export const BooksList = () => {
           }}
           variant="contained"
           loading={loadingButton}
-          disabled={possibleQtyBooks}
           onClick={() =>
             dispatch(loadMoreBooks({ search, category, sort, page }))
           }

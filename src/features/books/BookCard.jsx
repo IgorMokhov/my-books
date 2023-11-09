@@ -14,13 +14,14 @@ import {
 
 export const BookCard = ({ image, title, authors, categories, id }) => {
   return (
-    <Grid item xs={4} md={3}>
+    <Grid item xs={12} sm={4} md={3}>
       <Card
         sx={{
-          maxWidth: 220,
+          width: 220,
           transition: 'all 0.3s ease',
           '&:hover': { transform: 'translateY(-6px)' },
           position: 'relative',
+          m: '0 auto',
         }}
       >
         <Link
@@ -43,14 +44,13 @@ export const BookCard = ({ image, title, authors, categories, id }) => {
 
           <CardContent
             sx={{
-              height: 120,
+              height: 130,
               p: '15px 10px',
-              // position: 'relative',
             }}
           >
             <Typography
               sx={{ fontSize: '12px', textDecoration: 'underline' }}
-              variant="p"
+              variant="body1"
               component="span"
             >
               {categories?.[0]}
@@ -65,12 +65,18 @@ export const BookCard = ({ image, title, authors, categories, id }) => {
               variant="h6"
               component="h6"
             >
-              {title.length > 40 ? `${title.slice(0, 40)}...` : title}
+              {title.length > 38 ? `${title.slice(0, 38)}...` : title}
             </Typography>
             <Typography sx={{ fontSize: '12px' }} variant="p" component="span">
               {authors?.[0]}
             </Typography>
-            <Box sx={{ position: 'absolute', top: '0px', right: '0px' }}>
+            <Box
+              sx={{
+                position: 'absolute',
+                top: '4px',
+                right: '4px',
+              }}
+            >
               <FavouriteButton
                 id={id}
                 title={title}

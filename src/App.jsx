@@ -23,7 +23,7 @@ import './App.css';
 
 const App = () => {
   const mode = useSelector(selectTheme);
-  const theme = useMemo(() => createTheme(getDesignTokens(mode)), [mode]);
+  const theme = useMemo(() => createTheme(getDesignTokens(mode)), [mode]); // подробно изучить
 
   return (
     <div className="App">
