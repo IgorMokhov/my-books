@@ -32,7 +32,7 @@ export const BookCard = ({ image, title, authors, categories, id }) => {
           <CardMedia
             sx={{
               height: 180,
-              width: 'auto',
+              width: 'auto', // разобраться с правильной шириной картинок
               m: '30px auto 0',
               boxShadow: '10px 10px 13px 0px rgba(0,0,0,0.75)',
               borderRadius: '5px',
@@ -60,14 +60,14 @@ export const BookCard = ({ image, title, authors, categories, id }) => {
                 fontSize: '14px',
                 fontWeight: 'bold',
                 lineHeight: '17px',
-                m: '10px 0 5px',
+                m: '5px 0',
               }}
               variant="h6"
               component="h6"
             >
               {title.length > 38 ? `${title.slice(0, 38)}...` : title}
             </Typography>
-            <Typography sx={{ fontSize: '12px' }} variant="p" component="span">
+            <Typography sx={{ fontSize: '12px', lineHeight: 1.2 }} variant="body1" component="p">
               {authors?.[0]}
             </Typography>
             <Box

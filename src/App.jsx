@@ -42,7 +42,7 @@ const App = () => {
         </Main>
         <Footer />
 
-        <FavouriteBooks />
+        <FavouriteBooks /> 
       </ThemeProvider>
     </div>
   );

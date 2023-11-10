@@ -16,6 +16,10 @@ export const loadMoreBooks = createAsyncThunk(
   }
 );
 
+// Проверка на оставшиеся книги на сервере. Google Books API присылает не все книги (меньше чем сообщает в поле totalItems)
+const checkRemainingItems = (loadedItems) => !(loadedItems.length < 30);
+
+// Проверка на повторные книги при "load more". Google Books API присылает повторы.
 const checkUniqueItems = (state, loadedItems) => {
   const uniqueIds = new Set(state.entities.map((item) => item.id));
   const filteredItems = loadedItems.filter((item) => !uniqueIds.has(item.id));
@@ -29,6 +33,7 @@ const initialState = {
   total: null,
   page: 0,
   error: null,
+  isRemainingItems: false,
 };
 
 export const booksSlice = createSlice({
@@ -53,8 +58,9 @@ export const booksSlice = createSlice({
         state.loading = 'succeeded';
         state.entities = action.payload.items;
         state.total = action.payload.totalItems;
-        state.page = state.page + 1;
+        state.page = 1;
         state.error = null;
+        state.isRemainingItems = checkRemainingItems(action.payload.items);
       })
       .addCase(loadBooks.rejected, (state, action) => {
         state.loading = 'failed';
@@ -64,9 +70,10 @@ export const booksSlice = createSlice({
         state.loadingButton = true;
       })
       .addCase(loadMoreBooks.fulfilled, (state, action) => {
-        state.entities = checkUniqueItems(state, action.payload.items || []);
+        state.entities = checkUniqueItems(state, action.payload.items);
         state.page = state.page + 1;
         state.loadingButton = false;
+        state.isRemainingItems = checkRemainingItems(action.payload.items);
       })
       .addCase(loadMoreBooks.rejected, (state, action) => {
         state.error = action.error.message;

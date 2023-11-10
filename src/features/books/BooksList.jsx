@@ -6,7 +6,6 @@ import { clearBooks, loadMoreBooks, selectBooksAllInfo } from './books-slice';
 import { selectControls } from '../controls/controls-slice';
 import { selectTheme } from '../theme/theme-slice';
 import { darkModeColors, lightModeColors } from '../../themeConfig';
-// import { MAX_RESULTS } from '../../apiConfig';
 
 import {
   Box,
@@ -22,14 +21,19 @@ import LoadingButton from '@mui/lab/LoadingButton';
 import { useCustomSnackbar } from '../../utils/useCustomSnackbar';
 
 export const BooksList = () => {
-  const { loading, loadingButton, entities, total, error, page } =
-    useSelector(selectBooksAllInfo);
+  const {
+    loading,
+    loadingButton,
+    entities,
+    total,
+    error,
+    page,
+    isRemainingItems,
+  } = useSelector(selectBooksAllInfo);
   const { search, category, sort } = useSelector(selectControls);
   const theme = useSelector(selectTheme);
   const showSnackbar = useCustomSnackbar();
   const dispatch = useDispatch();
-
-  // const possibleQtyBooks = MAX_RESULTS * (page + 1);
 
   const clearHandler = () => {
     dispatch(clearBooks());
@@ -87,18 +91,14 @@ export const BooksList = () => {
           ))}
       </Grid>
 
-      {!!total && (
+      {isRemainingItems && (
         <LoadingButton
           sx={{
             mb: '40px',
-            // color: 'black',
             backgroundColor:
               theme === 'light'
                 ? lightModeColors.backgroundPaper
                 : darkModeColors.backgroundPaper,
-            // '&:hover': {
-            //   backgroundColor: 'lightgray',
-            // },
           }}
           variant="contained"
           loading={loadingButton}

@@ -13,7 +13,7 @@ const favouritesSlice = createSlice({
       state.list.push(action.payload); // {id, title, image}
     },
     deleteBook: (state, action) => {
-      state.list = state.list.filter((book) => book.id !== action.payload); // id
+      state.list = state.list.filter((book) => book.id !== action.payload); 
     },
     openFavourites: (state) => {
       state.isOpen = true;
