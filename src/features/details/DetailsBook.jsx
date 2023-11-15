@@ -1,25 +1,16 @@
-import { useEffect } from 'react';
-
-import { useParams } from 'react-router-dom';
-import { Link as RouterLink } from 'react-router-dom';
-
-import { useDispatch, useSelector } from 'react-redux';
-import { clearDetails, loadBookById, selectDetails } from './details-slice';
-
-import { FavouriteButton } from '../../UI/FavouriteButton';
+import { FavouritesBtn } from '../../UI/FavouritesBtn';
+import { GoBackBtn } from '../../UI/GoBackBtn';
+import { useDetailsBooks } from './useDetailsBook';
 import notFoundImg from '../../accets/not-found-img.jpg';
 
-import parse from 'html-react-parser';
 import {
   Box,
   CircularProgress,
   Container,
-  Link,
   Paper,
   Typography,
   styled,
 } from '@mui/material';
-import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 
 const StyledImage = styled('img')({
   boxShadow: '10px 10px 13px 0px rgba(0,0,0,0.75)',
@@ -30,29 +21,23 @@ const StyledImage = styled('img')({
 });
 
 export const DetailsBook = () => {
-  const { id } = useParams();
-  const { loading, currentBook, error } = useSelector(selectDetails);
-  const dispatch = useDispatch();
+  const {
+    id,
+    loading,
+    error,
+    showSnackbar,
+    navigate,
+    image,
+    categories,
+    title,
+    authors,
+    parsedDescription,
+  } = useDetailsBooks();
 
-  const parseText = (html) => {
-    if (!html) return 'No description ...';
-
-    return parse(html);
-  };
-
-  const image = currentBook?.volumeInfo.imageLinks?.thumbnail;
-  const categories = currentBook?.volumeInfo.categories?.[0];
-  const title = currentBook?.volumeInfo.title;
-  const authors = currentBook?.volumeInfo.authors?.join(', ');
-  const parsedDescription = parseText(currentBook?.volumeInfo.description); // used library html-react-parser
-
-  useEffect(() => {
-    dispatch(loadBookById(id));
-
-    return () => {
-      dispatch(clearDetails());
-    };
-  }, [id, dispatch]);
+  if (loading === 'failed') {
+    navigate('/');
+    showSnackbar(error, 'error');
+  }
 
   return (
     <Container
@@ -63,14 +48,10 @@ export const DetailsBook = () => {
       }}
     >
       {loading === 'pending' && (
-        <CircularProgress sx={{ textAlign: 'center' }} color="secondary" />
-      )}
-
-      {/* заменить на снек бар?? */}
-      {loading === 'failed' && (
-        <Typography variant="h5" component="h5">
-          {`Error: ${error}`}
-        </Typography>
+        <CircularProgress
+          sx={{ textAlign: 'center', m: '20px 0' }}
+          color="secondary"
+        />
       )}
 
       {loading === 'succeeded' && (
@@ -97,34 +78,7 @@ export const DetailsBook = () => {
               },
             }}
           >
-            <Link
-              sx={{
-                m: '27px 0',
-                color: 'inherit',
-                display: 'flex',
-                minWidth: 130,
-                '&:hover': {
-                  '& svg': {
-                    transform: 'translateX(-5px)',
-                  },
-                },
-                '@media (max-width: 960px)': {
-                  ml: '20px',
-                },
-              }}
-              component={RouterLink}
-              to="/"
-              relative="path" // ????
-              underline="none"
-            >
-              <ArrowBackIcon
-                sx={{ pr: '3px', transition: 'transform 0.3s' }}
-                fontSize="large"
-              />
-              <Typography variant="h6" component="span">
-                Go Back
-              </Typography>
-            </Link>
+            <GoBackBtn />
             <StyledImage sx={{ mb: '20px' }} src={image || notFoundImg} />
             <Box
               sx={{
@@ -133,12 +87,7 @@ export const DetailsBook = () => {
                 top: '15px',
               }}
             >
-              <FavouriteButton
-                size="large"
-                id={id}
-                title={title}
-                image={image}
-              />
+              <FavouritesBtn size="large" id={id} title={title} image={image} /> 
             </Box>
           </Box>
 

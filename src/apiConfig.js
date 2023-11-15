@@ -23,4 +23,11 @@ export const loadData = async ({
   }
 };
 
-export const loadDetailsData = () => {}; // ??
+export const loadDetailsData = async (id) => {
+  try {
+    const response = await axios.get(`${BASE_URL}/${id}?key=${API_KEY}`);
+    return response.data;
+  } catch (error) {
+    throw new Error(error.message);
+  }
+};

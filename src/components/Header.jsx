@@ -8,7 +8,7 @@ import {
   selectQtyFavourites,
 } from '../features/favourites/favourites-slice';
 
-import { MenuBook } from '@mui/icons-material';
+import { CollectionsBookmark } from '@mui/icons-material';
 import { AppBar, Badge, Container, IconButton, Toolbar } from '@mui/material';
 
 export const Header = () => {
@@ -34,9 +34,10 @@ export const Header = () => {
             }}
           >
             <Badge badgeContent={favouritesQty} color="secondary">
-              <MenuBook />
+              <CollectionsBookmark />
             </Badge>
           </IconButton>
+
           <ThemeSwitcher />
         </Toolbar>
       </Container>

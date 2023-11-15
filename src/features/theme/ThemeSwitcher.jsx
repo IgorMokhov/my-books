@@ -10,10 +10,12 @@ export const ThemeSwitcher = () => {
   const theme = useSelector(selectTheme);
   const dispatch = useDispatch();
 
+  const onChangeTheme = () => {
+    dispatch(setTheme(theme === 'light' ? 'dark' : 'light'));
+  };
+
   return (
-    <IconButton
-      onClick={() => dispatch(setTheme(theme === 'light' ? 'dark' : 'light'))}
-    >
+    <IconButton onClick={onChangeTheme}>
       {theme === 'light' ? <DarkModeIcon /> : <LightModeIcon />}
     </IconButton>
   );

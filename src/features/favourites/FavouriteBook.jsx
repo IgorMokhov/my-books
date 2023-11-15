@@ -11,6 +11,7 @@ import {
   ListItemButton,
   ListItemIcon,
   ListItemText,
+  Typography,
 } from '@mui/material';
 
 export const FavouriteBook = ({ id, title, image, navigate, dispatch }) => {
@@ -35,7 +36,14 @@ export const FavouriteBook = ({ id, title, image, navigate, dispatch }) => {
             <Avatar alt={title} src={image} />
           </ListItemAvatar>
           <ListItemText
-            primary={title.length > 38 ? `${title.slice(0, 38)}...` : title}
+            sx={{
+              lineHeight: '10px',
+            }}
+            primary={
+              <Typography sx={{ fontSize: '15px', lineHeight: 1.2 }}>
+                {title.length > 35 ? `${title.slice(0, 35)}...` : title}
+              </Typography>
+            }
           />
           <ListItemIcon sx={{ justifyContent: 'flex-end' }}>
             <IconButton onClick={deleteHandler}>

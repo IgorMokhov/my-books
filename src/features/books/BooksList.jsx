@@ -1,14 +1,10 @@
-import { useEffect } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-
 import { BookCard } from './BookCard';
-import { clearBooks, loadMoreBooks, selectBooksAllInfo } from './books-slice';
-import { selectControls } from '../controls/controls-slice';
-import { selectTheme } from '../theme/theme-slice';
-import { darkModeColors, lightModeColors } from '../../themeConfig';
+import { useBooksList } from './useBooksList';
 
+import DeleteIcon from '@mui/icons-material/Delete';
 import {
   Box,
+  Button,
   CircularProgress,
   Container,
   Grid,
@@ -16,9 +12,6 @@ import {
   Tooltip,
   Typography,
 } from '@mui/material';
-import DeleteIcon from '@mui/icons-material/Delete';
-import LoadingButton from '@mui/lab/LoadingButton';
-import { useCustomSnackbar } from '../../utils/useCustomSnackbar';
 
 export const BooksList = () => {
   const {
@@ -27,29 +20,28 @@ export const BooksList = () => {
     entities,
     total,
     error,
-    page,
     isRemainingItems,
-  } = useSelector(selectBooksAllInfo);
-  const { search, category, sort } = useSelector(selectControls);
-  const theme = useSelector(selectTheme);
-  const showSnackbar = useCustomSnackbar();
-  const dispatch = useDispatch();
+    theme,
+    clearHandler,
+    showSnackbar,
+    loadMoreHandler,
+  } = useBooksList(); // вся логика вынесена в кастомный хук
 
-  const clearHandler = () => {
-    dispatch(clearBooks());
-    showSnackbar('All books have been deleted!', 'info');
-  };
-
-  useEffect(() => {
-    if (loading === 'failed') {
-      showSnackbar(error, 'error');
-    }
-  }, [loading, error, dispatch, showSnackbar]);
+  if (loading === 'failed') {
+    showSnackbar(error, 'error');
+  }
 
   return (
     <Container maxWidth="lg">
       {total > 0 && (
-        <Box sx={{ mb: '20px' }}>
+        <Box
+          sx={{
+            mb: '20px',
+            '@media (max-width: 720px)': {
+              m: '10px 0',
+            },
+          }}
+        >
           <Typography
             sx={{ fontWeight: '400', mr: '5px' }}
             variant="h6"
@@ -75,7 +67,9 @@ export const BooksList = () => {
         </Typography>
       )}
 
-      {loading === 'pending' && <CircularProgress color="secondary" />}
+      {loading === 'pending' && (
+        <CircularProgress sx={{ m: '20px 0' }} color="secondary" />
+      )}
 
       <Grid sx={{ mb: '40px' }} container rowSpacing={3} columnSpacing={2}>
         {loading === 'succeeded' &&
@@ -91,23 +85,17 @@ export const BooksList = () => {
           ))}
       </Grid>
 
-      {isRemainingItems && (
-        <LoadingButton
+      {total && isRemainingItems && (
+        <Button
           sx={{
             mb: '40px',
-            backgroundColor:
-              theme === 'light'
-                ? lightModeColors.backgroundPaper
-                : darkModeColors.backgroundPaper,
+            backgroundColor: theme.palette.background.paper,
           }}
           variant="contained"
-          loading={loadingButton}
-          onClick={() =>
-            dispatch(loadMoreBooks({ search, category, sort, page }))
-          }
+          onClick={loadMoreHandler}
         >
-          More books
-        </LoadingButton>
+          {loadingButton ? 'Loading ...' : 'Load more'}
+        </Button>
       )}
     </Container>
   );

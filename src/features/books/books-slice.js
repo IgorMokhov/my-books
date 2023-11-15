@@ -17,9 +17,10 @@ export const loadMoreBooks = createAsyncThunk(
 );
 
 // Проверка на оставшиеся книги на сервере. Google Books API присылает не все книги (меньше чем сообщает в поле totalItems)
-const checkRemainingItems = (loadedItems) => !(loadedItems.length < 30);
+const checkRemainingItems = (loadedItems) => !(loadedItems?.length < 30);
 
-// Проверка на повторные книги при "load more". Google Books API присылает повторы.
+
+// Проверка на повторные книги в момент "load more". Google Books API присылает повторы.
 const checkUniqueItems = (state, loadedItems) => {
   const uniqueIds = new Set(state.entities.map((item) => item.id));
   const filteredItems = loadedItems.filter((item) => !uniqueIds.has(item.id));

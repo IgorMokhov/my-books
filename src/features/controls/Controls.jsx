@@ -39,7 +39,7 @@ export const Controls = () => {
       >
         <Typography
           sx={{
-            fontWeight: '400',
+            fontWeight: 500,
             mb: '60px',
             color: 'white',
             '@media (max-width: 720px)': {
@@ -55,7 +55,9 @@ export const Controls = () => {
         >
           Find Your Book
         </Typography>
+
         <Search />
+
         <Box
           sx={{
             width: '100%',

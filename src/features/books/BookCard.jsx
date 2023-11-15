@@ -1,5 +1,5 @@
 import { Link as RouterLink } from 'react-router-dom';
-import { FavouriteButton } from '../../UI/FavouriteButton';
+import { FavouritesBtn } from '../../UI/FavouritesBtn';
 import notFoundImg from '../../accets/not-found-img.jpg';
 
 import {
@@ -32,7 +32,8 @@ export const BookCard = ({ image, title, authors, categories, id }) => {
           <CardMedia
             sx={{
               height: 180,
-              width: 'auto', // разобраться с правильной шириной картинок
+              maxWidth: 130,
+              width: 'auto',
               m: '30px auto 0',
               boxShadow: '10px 10px 13px 0px rgba(0,0,0,0.75)',
               borderRadius: '5px',
@@ -67,7 +68,11 @@ export const BookCard = ({ image, title, authors, categories, id }) => {
             >
               {title.length > 38 ? `${title.slice(0, 38)}...` : title}
             </Typography>
-            <Typography sx={{ fontSize: '12px', lineHeight: 1.2 }} variant="body1" component="p">
+            <Typography
+              sx={{ fontSize: '12px', lineHeight: 1.2 }}
+              variant="body1"
+              component="p"
+            >
               {authors?.[0]}
             </Typography>
             <Box
@@ -77,7 +82,7 @@ export const BookCard = ({ image, title, authors, categories, id }) => {
                 right: '4px',
               }}
             >
-              <FavouriteButton
+              <FavouritesBtn
                 id={id}
                 title={title}
                 image={image}

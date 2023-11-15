@@ -1,17 +1,10 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
-import axios from 'axios';
 
 export const loadBookById = createAsyncThunk(
   '@@details/loadBookById',
   async (id, { extra: api }) => {
-    try {
-      const response = await axios.get(
-        `${api.BASE_URL}/${id}?key=${api.API_KEY}`
-      );
-      return response.data;
-    } catch (error) {
-      throw new Error(error.message);
-    }
+    const response = api.loadDetailsData(id);
+    return response;
   }
 );
 
@@ -29,7 +22,7 @@ export const detailsSlice = createSlice({
   },
   extraReducers: (builder) => {
     builder
-      .addCase(loadBookById.pending, (state, action) => {
+      .addCase(loadBookById.pending, (state) => {
         state.loading = 'pending';
         state.error = null;
       })

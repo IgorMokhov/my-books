@@ -1,4 +1,6 @@
 import { useDispatch, useSelector } from 'react-redux';
+
+import { useCustomSnackbar } from '../utils/useCustomSnackbar';
 import {
   addBook,
   deleteBook,
@@ -10,16 +12,15 @@ import {
   BookmarkAddOutlined,
   BookmarkAddedOutlined,
 } from '@mui/icons-material';
-import { useCustomSnackbar } from '../utils/useCustomSnackbar';
 
-export const FavouriteButton = ({ id, title, image, size }) => {
+export const FavouritesBtn = ({ id, title, image, size }) => {
   const favourites = useSelector(selectFavourites);
   const showSnackbar = useCustomSnackbar();
   const dispatch = useDispatch();
 
   const isFavourite = favourites.find((book) => book.id === id);
 
-  const handleButtonClick = (event) => {
+  const handleClick = (event) => {
     event.preventDefault();
 
     if (isFavourite) {
@@ -36,7 +37,7 @@ export const FavouriteButton = ({ id, title, image, size }) => {
       title={isFavourite ? 'Remove from favourites' : 'Add to favourites'}
       placement="right"
     >
-      <IconButton onClick={handleButtonClick}>
+      <IconButton onClick={handleClick}>
         {isFavourite ? (
           <BookmarkAddedOutlined fontSize={size} color="secondary" />
         ) : (

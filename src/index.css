@@ -11,3 +11,8 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+
+/* решает проблему полосы прокрутки которая сдвигает контент */
+html {
+  overflow-y: scroll;
+}
