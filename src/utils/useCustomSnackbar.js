@@ -1,6 +1,7 @@
 import { useSnackbar } from 'notistack';
 import { Slide } from '@mui/material';
 
+// кастомный снекбар использующий библиотеку notistack
 export const useCustomSnackbar = () => {
   const { enqueueSnackbar } = useSnackbar();
 
