@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 
 import { Navbar } from './Navbar';
@@ -9,7 +10,14 @@ import {
 } from '../features/favourites/favourites-slice';
 
 import { CollectionsBookmark } from '@mui/icons-material';
-import { AppBar, Badge, Container, IconButton, Toolbar } from '@mui/material';
+import {
+  AppBar,
+  Badge,
+  Container,
+  IconButton,
+  Toolbar,
+  Typography,
+} from '@mui/material';
 
 export const Header = () => {
   const favouritesQty = useSelector(selectQtyFavourites);
@@ -20,11 +28,36 @@ export const Header = () => {
       <Container maxWidth="lg">
         <Toolbar
           sx={{
-            '@media (max-width: 420px)': {
+            '@media (max-width: 720px)': {
               p: 0,
             },
           }}
         >
+          <Link
+            underline="none"
+            style={{
+              color: 'inherit',
+              cursor: 'pointer',
+              textDecoration: 'none',
+            }}
+            to="/"
+          >
+            <Typography
+              sx={{
+                '@media (max-width: 720px)': {
+                  fontSize: '25px',
+                },
+                '@media (max-width: 420px)': {
+                  display: 'none',
+                },
+              }}
+              variant="h4"
+              component="span"
+            >
+              My Books
+            </Typography>
+          </Link>
+
           <Navbar />
 
           <IconButton

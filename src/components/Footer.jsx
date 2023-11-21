@@ -1,7 +1,12 @@
+import { Link } from 'react-router-dom';
 import { useSelector } from 'react-redux';
+
 import { selectTheme } from '../features/theme/theme-slice';
 import { lightModeColors, darkModeColors } from '../themeConfig';
-import { Box, Container, Divider, Typography } from '@mui/material';
+import githubIcon from '../accets/icons/github-icon.svg';
+import githubIconWhite from '../accets/icons/github-icon-white.svg';
+
+import { Container, Divider, Paper, Typography } from '@mui/material';
 
 export const Footer = () => {
   const theme = useSelector(selectTheme);
@@ -9,21 +14,45 @@ export const Footer = () => {
   return (
     <footer
       style={{
-        marginTop: 'auto',
-        backgroundColor:
-          theme === 'light'
-            ? lightModeColors.backgroundPaper
-            : darkModeColors.primaryBackground,
+        marginTop: 'auto', // + стили в App.css => прижимает footer
       }}
     >
-      <Box>
+      <Paper
+        sx={{
+          backgroundColor:
+            theme === 'light'
+              ? lightModeColors.backgroundPaper
+              : darkModeColors.backgroundPaper,
+        }}
+      >
         <Divider />
-        <Container>
-          <Typography sx={{ m: '5px 0 5px', textAlign: 'right' }}>
-            by Igor Mokhov
+        <Container
+          sx={{
+            height: '40px',
+            display: 'flex',
+            justifyContent: 'space-between',
+            alignItems: 'center',
+          }}
+        >
+          <Typography
+            sx={{ textAlign: 'right', fontSize: '15px' }}
+            component="span"
+          >
+            © {new Date().getFullYear()} My books
           </Typography>
+          <Link
+            to="https://github.com/IgorMokhov"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <img
+              style={{ height: '28px', display: 'block' }}
+              src={theme === 'light' ? githubIcon : githubIconWhite}
+              alt="github-icon"
+            />
+          </Link>
         </Container>
-      </Box>
+      </Paper>
     </footer>
   );
 };

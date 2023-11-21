@@ -26,6 +26,7 @@ export const Category = () => {
           pl: '10px',
           textAlign: 'left',
           borderRadius: '20px',
+          '&:hover': {},
         }}
         value={category}
         onChange={handleCategory}
