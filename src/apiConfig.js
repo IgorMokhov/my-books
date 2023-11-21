@@ -1,7 +1,6 @@
 import axios from 'axios';
 
 export const BASE_URL = 'https://www.googleapis.com/books/v1/volumes';
-export const API_KEY = 'AIzaSyClgTthPOW8evajugq_vxS3U_Gf3V-Ix7Y';
 export const MAX_RESULTS = 30;
 
 export const loadData = async ({
@@ -15,7 +14,7 @@ export const loadData = async ({
 
   try {
     const response = await axios.get(
-      `${BASE_URL}?q=${search}+subject:${selectedCategory}&orderBy=${sort}&startIndex=${startIndex}&maxResults=${MAX_RESULTS}&key=${API_KEY}`
+      `${BASE_URL}?q=${search}+subject:${selectedCategory}&orderBy=${sort}&startIndex=${startIndex}&maxResults=${MAX_RESULTS}&key=${process.env.REACT_APP_API_KEY}`
     );
     return response.data;
   } catch (error) {
@@ -25,7 +24,9 @@ export const loadData = async ({
 
 export const loadDetailsData = async (id) => {
   try {
-    const response = await axios.get(`${BASE_URL}/${id}?key=${API_KEY}`);
+    const response = await axios.get(
+      `${BASE_URL}/${id}?key=${process.env.REACT_APP_API_KEY}`
+    );
     return response.data;
   } catch (error) {
     throw new Error(error.message);
