@@ -1,5 +1,6 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 
+
 export const loadBooks = createAsyncThunk(
   '@@books/loadBooks',
   async ({ search, category, sort }, { extra: api }) => {
@@ -12,13 +13,19 @@ export const loadMoreBooks = createAsyncThunk(
   '@@books/loadMoreBooks',
   async ({ search, category, sort, page }, { extra: api }) => {
     const response = await api.loadData({ search, category, sort, page });
+    console.log(response);
     return response;
   }
 );
 
 // Проверка на оставшиеся книги на сервере. Google Books API присылает не все книги (меньше чем сообщает в поле totalItems)
-const checkRemainingItems = (loadedItems) => !(loadedItems?.length < 30);
-
+const checkRemainingItems = (loadedItems) => {
+  if (loadedItems?.length < 30 || !loadedItems) {
+    return false;
+  } else {
+    return true;
+  }
+};
 
 // Проверка на повторные книги в момент "load more". Google Books API присылает повторы.
 const checkUniqueItems = (state, loadedItems) => {
@@ -71,7 +78,7 @@ export const booksSlice = createSlice({
         state.loadingButton = true;
       })
       .addCase(loadMoreBooks.fulfilled, (state, action) => {
-        state.entities = checkUniqueItems(state, action.payload.items);
+        state.entities = checkUniqueItems(state, action.payload.items || []); // передача пустого массива в случае если items отсутствует
         state.page = state.page + 1;
         state.loadingButton = false;
         state.isRemainingItems = checkRemainingItems(action.payload.items);

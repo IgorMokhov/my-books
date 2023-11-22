@@ -11,16 +11,17 @@ export const Controls = () => {
     <Paper
       sx={{
         height: '450px',
-        pt: '100px',
+        pt: '90px',
         mb: '15px',
+        boxShadow: '0px 0px 7px 0px rgba(0,0,0,0.75)',
         backgroundImage: `url(${backgroundImg})`,
         backgroundRepeat: 'no-repeat',
         backgroundSize: 'cover',
         backgroundPosition: 'center',
-        '@media (max-width: 720px)': { margin: 0 },
+        '@media (max-width: 720px)': { margin: 0, pt: '20px' },
         '@media (max-width: 420px)': {
           height: '400px',
-          pt: '70px',
+          pt: '10px',
         },
       }}
       component="div"
@@ -39,15 +40,18 @@ export const Controls = () => {
       >
         <Typography
           sx={{
+            fontSize: 88,
             fontWeight: 500,
             mb: '60px',
             color: 'white',
+            textShadow: '2px 2px 3px rgba(0, 0, 0, 0.6)',
             '@media (max-width: 720px)': {
-              fontSize: '50px',
+              fontSize: '75px',
               mb: '20px',
             },
-            '@media (max-width: 425px)': {
-              fontSize: '40px',
+            '@media (max-width: 420px)': {
+              fontSize: '60px',
+              mb: '30px',
             },
           }}
           variant="h2"
