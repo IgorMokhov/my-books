@@ -26,7 +26,7 @@ export const Search = () => {
     >
       <InputBase
         sx={{
-          p: '5px 25px 5px',
+          p: '5px 25px',
         }}
         type="text"
         fullWidth
