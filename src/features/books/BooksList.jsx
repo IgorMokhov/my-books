@@ -25,7 +25,7 @@ export const BooksList = () => {
     clearHandler,
     showSnackbar,
     loadMoreHandler,
-  } = useBooksList(); // вся логика вынесена в кастомный хук
+  } = useBooksList(); // All the logic is moved into a custom hook.
 
   if (loading === 'failed') {
     showSnackbar(error, 'error');

@@ -1,10 +1,6 @@
-import {
-  Container,
-  List,
-  ListItem,
-  ListItemText,
-  Typography,
-} from '@mui/material';
+import { TechList } from './TechList';
+
+import { Container, Typography } from '@mui/material';
 
 export const About = () => {
   return (
@@ -18,29 +14,11 @@ export const About = () => {
       <Typography sx={{ pt: '10px' }}>
         Welcome to my book search application powered by the Google Books API.
       </Typography>
-
       <Typography sx={{ pt: '10px' }}>
         Technologies used in the development:
       </Typography>
-      <List>
-        {[
-          'HTML',
-          'CSS',
-          'JavaScript',
-          'React',
-          'React Router',
-          'Redux Toolkit',
-          'Redux Persist',
-          'Material UI',
-          'Axios',
-          'Html React Parser',
-          'Notistack',
-        ].map((tech) => (
-          <ListItem key={tech}>
-            <ListItemText sx={{ textAlign: 'center' }} primary={tech} />
-          </ListItem>
-        ))}
-      </List>
+
+      <TechList />
     </Container>
   );
 };

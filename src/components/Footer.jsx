@@ -14,7 +14,7 @@ export const Footer = () => {
   return (
     <footer
       style={{
-        marginTop: 'auto', // + стили в App.css => прижимает footer
+        marginTop: 'auto', // + styles in App.css => pushes the footer down
       }}
     >
       <Paper
@@ -26,6 +26,7 @@ export const Footer = () => {
         }}
       >
         <Divider />
+        
         <Container
           sx={{
             height: '40px',

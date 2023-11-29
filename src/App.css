@@ -2,7 +2,7 @@
 
 .App {
   text-align: center;
-  /* прижимает footer */
+  /* Pushes the footer down */
   display: flex;
   flex-direction: column;
   min-height: 100vh;

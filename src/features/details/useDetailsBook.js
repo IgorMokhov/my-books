@@ -17,7 +17,7 @@ export const useDetailsBooks = () => {
   const parseText = (html) => {
     if (!html) return 'No description ...';
 
-    return parse(html); // использована библиотека html-react-parser для парсинга html в компонент
+    return parse(html); // The html-react-parser library is used for parsing HTML into a component.
   };
 
   const image = currentBook?.volumeInfo.imageLinks?.thumbnail;

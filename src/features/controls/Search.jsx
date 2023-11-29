@@ -5,7 +5,7 @@ import { Box, IconButton, InputBase } from '@mui/material';
 import SearchIcon from '@mui/icons-material/Search';
 
 export const Search = () => {
-  const { search, theme, searchSubmitHandler, onChangeHandler } = useSearch(); // вся логика вынесена в кастомный хук
+  const { search, theme, searchSubmitHandler, onChangeHandler } = useSearch(); // All the logic is moved into a custom hook.
 
   return (
     <Box

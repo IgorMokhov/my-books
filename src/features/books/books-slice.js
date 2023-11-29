@@ -18,7 +18,7 @@ export const loadMoreBooks = createAsyncThunk(
   }
 );
 
-// Проверка на оставшиеся книги на сервере. Google Books API присылает не все книги (меньше чем сообщает в поле totalItems)
+// Checking for remaining books on the server. Google Books API doesn't always return all books (fewer than indicated in the totalItems field).
 const checkRemainingItems = (loadedItems) => {
   if (loadedItems?.length < 30 || !loadedItems) {
     return false;
@@ -27,7 +27,7 @@ const checkRemainingItems = (loadedItems) => {
   }
 };
 
-// Проверка на повторные книги в момент "load more". Google Books API присылает повторы.
+// Checking for duplicate books during "load more." Google Books API returns duplicates in some cases.
 const checkUniqueItems = (state, loadedItems) => {
   const uniqueIds = new Set(state.entities.map((item) => item.id));
   const filteredItems = loadedItems.filter((item) => !uniqueIds.has(item.id));
@@ -78,7 +78,7 @@ export const booksSlice = createSlice({
         state.loadingButton = true;
       })
       .addCase(loadMoreBooks.fulfilled, (state, action) => {
-        state.entities = checkUniqueItems(state, action.payload.items || []); // передача пустого массива в случае если items отсутствует
+        state.entities = checkUniqueItems(state, action.payload.items || []); // Passing an empty array in case "items" is absent.
         state.page = state.page + 1;
         state.loadingButton = false;
         state.isRemainingItems = checkRemainingItems(action.payload.items);

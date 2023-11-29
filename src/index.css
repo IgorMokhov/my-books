@@ -12,7 +12,7 @@ code {
     monospace;
 }
 
-/* решает проблему полосы прокрутки которая сдвигает контент */
+/* Resolves the issue of a scrollbar that shifts the content */
 html {
   overflow-y: scroll;
 }
