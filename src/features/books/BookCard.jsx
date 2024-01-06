@@ -39,7 +39,7 @@ export const BookCard = ({ image, title, authors, categories, id }) => {
               borderRadius: '5px',
             }}
             component="img"
-            alt={title}
+            alt={title || 'No image'}
             image={image || notFoundImg}
           />
 
@@ -54,7 +54,7 @@ export const BookCard = ({ image, title, authors, categories, id }) => {
               variant="body1"
               component="span"
             >
-              {categories?.[0]}
+              {categories?.[0] || 'No categories'}
             </Typography>
             <Typography
               sx={{
@@ -66,14 +66,14 @@ export const BookCard = ({ image, title, authors, categories, id }) => {
               variant="h6"
               component="h6"
             >
-              {title.length > 38 ? `${title.slice(0, 38)}...` : title}
+              {title.length > 38 ? `${title.slice(0, 38)}...` : title || 'No title'}
             </Typography>
             <Typography
               sx={{ fontSize: '12px', lineHeight: 1.2 }}
               variant="body1"
               component="p"
             >
-              {authors?.[0]}
+              {authors?.[0] || 'No authors'}
             </Typography>
             <Box
               sx={{
