@@ -3,7 +3,7 @@ import { useSelector } from 'react-redux';
 
 import { selectTheme } from '../features/theme/theme-slice';
 import { lightModeColors, darkModeColors } from '../themeConfig';
-import githubIcon from '../accets/icons/github-icon.svg';
+import githubIcon from '../accets/icons/github-icon-white.svg';
 import githubIconWhite from '../accets/icons/github-icon-white.svg';
 
 import { Container, Divider, Paper, Typography } from '@mui/material';
@@ -26,7 +26,7 @@ export const Footer = () => {
         }}
       >
         <Divider />
-        
+
         <Container
           sx={{
             height: '40px',
