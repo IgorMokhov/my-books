@@ -1,18 +1,27 @@
-export const lightModeColors = {
+import { Theme } from './types';
+
+type ModeColors = {
+  primary: string;
+  primaryBackground: string;
+  secondary: string;
+  backgroundPaper: string;
+};
+
+export const lightModeColors: ModeColors = {
   primary: '#FFFFFF',
   primaryBackground: '#FFFFFF',
   secondary: '#A52A2A',
   backgroundPaper: '#FAFAFA',
 };
 
-export const darkModeColors = {
+export const darkModeColors: ModeColors = {
   primary: '#000000',
   primaryBackground: '#333333',
   secondary: '#FF5733',
   backgroundPaper: '#1E1E1E',
 };
 
-export const getDesignTokens = (mode) => ({
+export const getDesignTokens = (mode: Theme) => ({
   palette: {
     mode,
     ...(mode === 'light'

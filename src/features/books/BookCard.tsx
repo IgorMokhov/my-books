@@ -11,8 +11,17 @@ import {
   Link,
   Typography,
 } from '@mui/material';
+import { AppBook } from '../../types';
 
-export const BookCard = ({ image, title, authors, categories, id }) => {
+interface BookCardProps extends AppBook {}
+
+export const BookCard = ({
+  image,
+  title,
+  authors,
+  categories,
+  id,
+}: BookCardProps) => {
   return (
     <Grid item xs={12} sm={4} md={3}>
       <Card
@@ -66,7 +75,9 @@ export const BookCard = ({ image, title, authors, categories, id }) => {
               variant="h6"
               component="h6"
             >
-              {title.length > 38 ? `${title.slice(0, 38)}...` : title || 'No title'}
+              {title.length > 38
+                ? `${title.slice(0, 38)}...`
+                : title || 'No title'}
             </Typography>
             <Typography
               sx={{ fontSize: '12px', lineHeight: 1.2 }}

@@ -1,16 +1,17 @@
 import { useNavigate } from 'react-router-dom';
-import { useDispatch, useSelector } from 'react-redux';
+import { useSelector } from 'react-redux';
 
-import { loadBooks } from '../books/books-slice';
+import { loadBooks } from '../books/books-async-actions';
 import { selectControls, setSearch } from './controls-slice';
-import { selectTheme } from '../theme/theme-slice';
+import { selectTheme } from '../theme/theme-selectors';
 import { useCustomSnackbar } from '../../utils/useCustomSnackbar';
+import { useAppDispatch } from '../../redux-hooks';
 
 export const useSearch = () => {
   const { search, category, sort } = useSelector(selectControls);
   const theme = useSelector(selectTheme);
   const showSnackbar = useCustomSnackbar();
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
   const navigate = useNavigate();
 
   const searchSubmitHandler = (event) => {

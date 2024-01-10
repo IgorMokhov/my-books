@@ -1,6 +1,6 @@
 {
   "compilerOptions": {
-    "lib": ["dom", "dom.iterable", "esnext"],
+    "lib": ["es6", "dom", "dom.iterable", "esnext"],
     "module": "esnext",
     "moduleResolution": "bundler",
     "target": "es2015",
@@ -16,5 +16,6 @@
     "resolveJsonModule": true,
     "skipLibCheck": true,
     "strict": true
-  }
+  },
+  "include": ["src/components", "src/custom.d.ts"]
 }

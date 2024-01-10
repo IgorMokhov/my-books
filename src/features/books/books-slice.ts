@@ -1,41 +1,23 @@
-import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
+import { PayloadAction, createSlice } from '@reduxjs/toolkit';
+
+import { loadBooks, loadMoreBooks } from './books-async-actions';
+import { checkRemainingItems, checkUniqueItems } from './books-utils';
+import { GoogleBook, Status } from '../../types/index';
 
 
-export const loadBooks = createAsyncThunk(
-  '@@books/loadBooks',
-  async ({ search, category, sort }, { extra: api }) => {
-    const response = await api.loadData({ search, category, sort });
-    return response;
-  }
-);
-
-export const loadMoreBooks = createAsyncThunk(
-  '@@books/loadMoreBooks',
-  async ({ search, category, sort, page }, { extra: api }) => {
-    const response = await api.loadData({ search, category, sort, page });
-    console.log(response);
-    return response;
-  }
-);
-
-// Checking for remaining books on the server. Google Books API doesn't always return all books (fewer than indicated in the totalItems field).
-const checkRemainingItems = (loadedItems) => {
-  if (loadedItems?.length < 30 || !loadedItems) {
-    return false;
-  } else {
-    return true;
-  }
+export type booksSlice = {
+  loading: Status;
+  loadingButton: boolean;
+  entities: GoogleBook[];
+  total: number | null;
+  page: number;
+  error: string | null;
+  isRemainingItems: boolean;
 };
 
-// Checking for duplicate books during "load more." Google Books API returns duplicates in some cases.
-const checkUniqueItems = (state, loadedItems) => {
-  const uniqueIds = new Set(state.entities.map((item) => item.id));
-  const filteredItems = loadedItems.filter((item) => !uniqueIds.has(item.id));
-  return state.entities.concat(filteredItems);
-};
 
-const initialState = {
-  loading: 'idle', // pending / succeeded  / failed
+const initialState: booksSlice = {
+  loading: 'idle',
   loadingButton: false,
   entities: [],
   total: null,
@@ -44,11 +26,12 @@ const initialState = {
   isRemainingItems: false,
 };
 
+// eslint-disable-next-line
 export const booksSlice = createSlice({
   name: '@@books',
   initialState,
   reducers: {
-    setError: (state, action) => {
+    setError: (state, action: PayloadAction<string>) => {
       state.error = action.payload;
     },
     clearBooks: () => initialState,
@@ -72,7 +55,7 @@ export const booksSlice = createSlice({
       })
       .addCase(loadBooks.rejected, (state, action) => {
         state.loading = 'failed';
-        state.error = action.error.message;
+        state.error = action.error.message || 'Unknown error';
       })
       .addCase(loadMoreBooks.pending, (state) => {
         state.loadingButton = true;
@@ -84,7 +67,7 @@ export const booksSlice = createSlice({
         state.isRemainingItems = checkRemainingItems(action.payload.items);
       })
       .addCase(loadMoreBooks.rejected, (state, action) => {
-        state.error = action.error.message;
+        state.error = action.error.message || 'Unknown error';
         state.loadingButton = false;
       });
   },
@@ -92,8 +75,3 @@ export const booksSlice = createSlice({
 
 export const { setError, clearBooks } = booksSlice.actions;
 export const booksReducer = booksSlice.reducer;
-
-// selectors
-export const selectBooksAllInfo = (state) => state.books;
-export const selectBooks = (state) => state.books.entities;
-export const selectError = (state) => state.books.error;

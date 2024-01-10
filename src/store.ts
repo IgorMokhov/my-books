@@ -41,7 +41,9 @@ export const store = configureStore({
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware({
       thunk: {
-        extraArgument: api,
+        extraArgument: {
+          api,
+        },
       },
       serializableCheck: {
         ignoredActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER],

@@ -1,9 +1,9 @@
 import { Link } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 
-import { selectTheme } from '../features/theme/theme-slice';
+import { selectTheme } from '../features/theme/theme-selectors';
 import { lightModeColors, darkModeColors } from '../themeConfig';
-import githubIcon from '../accets/icons/github-icon-white.svg';
+import githubIcon from '../accets/icons/github-icon.svg';
 import githubIconWhite from '../accets/icons/github-icon-white.svg';
 
 import { Container, Divider, Paper, Typography } from '@mui/material';

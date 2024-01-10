@@ -17,7 +17,7 @@ import { NotFoundPage } from './pages/NotFoundPage';
 import { ThemeProvider, createTheme } from '@mui/material/styles';
 import CssBaseline from '@mui/material/CssBaseline';
 
-import { selectTheme } from './features/theme/theme-slice';
+import { selectTheme } from './features/theme/theme-selectors';
 import { getDesignTokens } from './themeConfig';
 import './App.css';
 

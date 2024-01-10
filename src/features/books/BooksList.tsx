@@ -1,5 +1,7 @@
+import { GoogleBook } from '../../types';
 import { BookCard } from './BookCard';
-import { useBooksList } from './useBooksList';
+import { useBooks } from './useBooks';
+import { darkModeColors, lightModeColors } from '../../themeConfig';
 
 import DeleteIcon from '@mui/icons-material/Delete';
 import {
@@ -25,15 +27,15 @@ export const BooksList = () => {
     clearHandler,
     showSnackbar,
     loadMoreHandler,
-  } = useBooksList(); // All the logic is moved into a custom hook.
+  } = useBooks();
 
-  if (loading === 'failed') {
+  if (loading === 'failed' && error !== null) {
     showSnackbar(error, 'error');
   }
 
   return (
     <Container maxWidth="lg">
-      {total > 0 && (
+      {total !== null && total > 0 && (
         <Box
           sx={{
             mb: '20px',
@@ -56,7 +58,6 @@ export const BooksList = () => {
           </Tooltip>
         </Box>
       )}
-
       {total === 0 && (
         <Typography
           sx={{ mb: '20px', fontWeight: '400' }}
@@ -66,21 +67,19 @@ export const BooksList = () => {
           Nothing found
         </Typography>
       )}
-
       {loading === 'pending' && (
         <CircularProgress sx={{ m: '20px 0' }} color="secondary" />
       )}
-
       <Grid sx={{ mb: '40px' }} container rowSpacing={3} columnSpacing={2}>
         {loading === 'succeeded' &&
-          entities?.map((book) => (
+          entities?.map((book: GoogleBook) => (
             <BookCard
               key={book.id}
               id={book.id}
-              image={book.volumeInfo.imageLinks?.thumbnail}
-              title={book.volumeInfo?.title}
-              authors={book.volumeInfo?.authors}
-              categories={book.volumeInfo?.categories}
+              image={book.volumeInfo.imageLinks?.thumbnail || ''}
+              title={book.volumeInfo?.title || ''}
+              authors={book.volumeInfo?.authors || ''}
+              categories={book.volumeInfo?.categories || ''}
             />
           ))}
       </Grid>
@@ -89,7 +88,10 @@ export const BooksList = () => {
         <Button
           sx={{
             mb: '40px',
-            backgroundColor: theme.palette.background.paper,
+            backgroundColor:
+              theme === 'light'
+                ? lightModeColors.backgroundPaper
+                : darkModeColors.backgroundPaper,
           }}
           variant="contained"
           onClick={loadMoreHandler}
