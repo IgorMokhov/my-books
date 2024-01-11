@@ -1,10 +1,11 @@
 import { Link } from 'react-router-dom';
-import { useDispatch, useSelector } from 'react-redux';
+import { useSelector } from 'react-redux';
 
 import { Navbar } from './Navbar';
 import { ThemeSwitcher } from '../features/theme/ThemeSwitcher';
 import { openFavourites } from '../features/favourites/favourites-slice';
 import { selectQtyFavourites } from '../features/favourites/favourites-selectors';
+import { useAppDispatch } from '../redux-hooks';
 
 import { CollectionsBookmark } from '@mui/icons-material';
 import {
@@ -18,7 +19,7 @@ import {
 
 export const Header = () => {
   const favouritesQty = useSelector(selectQtyFavourites);
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
 
   return (
     <AppBar position="static">
@@ -31,7 +32,6 @@ export const Header = () => {
           }}
         >
           <Link
-            underline="none"
             style={{
               color: 'inherit',
               cursor: 'pointer',
