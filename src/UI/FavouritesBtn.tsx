@@ -1,26 +1,36 @@
-import { useDispatch, useSelector } from 'react-redux';
+import { useSelector } from 'react-redux';
 
 import { useCustomSnackbar } from '../utils/useCustomSnackbar';
-import {
-  addBook,
-  deleteBook,
-  selectFavourites,
-} from '../features/favourites/favourites-slice';
+import { addBook, deleteBook } from '../features/favourites/favourites-slice';
+import { selectFavourites } from '../features/favourites/favourites-selectors';
+import { FavouriteAppBook } from '../types';
 
 import { IconButton, Tooltip } from '@mui/material';
 import {
   BookmarkAddOutlined,
   BookmarkAddedOutlined,
 } from '@mui/icons-material';
+import { useAppDispatch } from '../redux-hooks';
 
-export const FavouritesBtn = ({ id, title, image, size }) => {
+type FavouritesBtnSize = 'small' | 'medium' | 'large';
+
+interface FavouritesBtnProps extends FavouriteAppBook {
+  size: FavouritesBtnSize;
+}
+
+export const FavouritesBtn = ({
+  id,
+  title,
+  image,
+  size,
+}: FavouritesBtnProps) => {
   const favourites = useSelector(selectFavourites);
   const showSnackbar = useCustomSnackbar();
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
 
   const isFavourite = favourites.find((book) => book.id === id);
 
-  const handleClick = (event) => {
+  const handleClick = (event: React.MouseEvent<HTMLButtonElement>) => {
     event.preventDefault();
 
     if (isFavourite) {

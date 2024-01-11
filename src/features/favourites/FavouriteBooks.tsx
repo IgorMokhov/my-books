@@ -1,13 +1,12 @@
-import { useDispatch, useSelector } from 'react-redux';
+import { useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 
 import { FavouriteBook } from './FavouriteBook';
-import notFoundImg from '../../accets/not-found-img.jpg';
+import { closeFavourites } from './favourites-slice';
 import {
-  closeFavourites,
   selectFavourites,
   selectIsOpenFavourites,
-} from './favourites-slice';
+} from './favourites-selectors';
 
 import { ArrowBack } from '@mui/icons-material';
 import {
@@ -20,11 +19,13 @@ import {
   ListItemText,
   Typography,
 } from '@mui/material';
+import { useAppDispatch } from '../../redux-hooks';
+import { FavouriteAppBook } from '../../types';
 
 export const FavouriteBooks = () => {
   const FavouriteBooks = useSelector(selectFavourites);
   const isOpenFavourites = useSelector(selectIsOpenFavourites);
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
   const navigate = useNavigate();
 
   return (
@@ -58,12 +59,12 @@ export const FavouriteBooks = () => {
             />
           </ListItem>
         ) : (
-          FavouriteBooks.map((book) => (
+          FavouriteBooks.map((book: FavouriteAppBook) => (
             <FavouriteBook
               key={book.id}
               id={book.id}
               title={book.title}
-              image={book.image || notFoundImg}
+              image={book.image}
               navigate={navigate}
               dispatch={dispatch}
             />

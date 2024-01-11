@@ -3,11 +3,8 @@ import { useDispatch, useSelector } from 'react-redux';
 
 import { Navbar } from './Navbar';
 import { ThemeSwitcher } from '../features/theme/ThemeSwitcher';
-
-import {
-  openFavourites,
-  selectQtyFavourites,
-} from '../features/favourites/favourites-slice';
+import { openFavourites } from '../features/favourites/favourites-slice';
+import { selectQtyFavourites } from '../features/favourites/favourites-selectors';
 
 import { CollectionsBookmark } from '@mui/icons-material';
 import {

@@ -1,5 +1,7 @@
 import { closeFavourites, deleteBook } from './favourites-slice';
 import { useCustomSnackbar } from '../../utils/useCustomSnackbar';
+import notFoundImg from '../../accets/not-found-img.jpg';
+
 
 import { Close } from '@mui/icons-material';
 import {
@@ -13,8 +15,22 @@ import {
   ListItemText,
   Typography,
 } from '@mui/material';
+import { FavouriteAppBook } from '../../types';
+import { NavigateFunction } from 'react-router-dom';
+import { AppDispatch } from '../../store';
 
-export const FavouriteBook = ({ id, title, image, navigate, dispatch }) => {
+interface FavouriteBookProps extends FavouriteAppBook {
+  navigate: NavigateFunction;
+  dispatch: AppDispatch;
+}
+
+export const FavouriteBook = ({
+  id,
+  title,
+  image,
+  navigate,
+  dispatch,
+}: FavouriteBookProps) => {
   const showSnackbar = useCustomSnackbar();
 
   const clickHandler = () => {
@@ -22,7 +38,7 @@ export const FavouriteBook = ({ id, title, image, navigate, dispatch }) => {
     navigate(`/books/${id}`);
   };
 
-  const deleteHandler = (event) => {
+  const deleteHandler = (event: React.MouseEvent<HTMLButtonElement>) => {
     event.stopPropagation();
     dispatch(deleteBook(id));
     showSnackbar('Removed from favourites!', 'info');
@@ -33,7 +49,7 @@ export const FavouriteBook = ({ id, title, image, navigate, dispatch }) => {
       <ListItem sx={{ p: '0' }}>
         <ListItemButton onClick={clickHandler}>
           <ListItemAvatar>
-            <Avatar alt={title} src={image} />
+            <Avatar alt={title} src={image || notFoundImg} />
           </ListItemAvatar>
           <ListItemText
             sx={{

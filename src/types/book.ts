@@ -12,8 +12,14 @@ export type GoogleBook = {
 
 export type AppBook = {
   id: string;
-  image: string | React.ReactElement;
+  image: string;
   title: string;
   authors: string[] | string;
   categories: string[] | string;
+};
+
+export type FavouriteAppBook = {
+  id: string;
+  image: string;
+  title: string;
 };
