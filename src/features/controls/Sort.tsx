@@ -1,13 +1,22 @@
-import { useDispatch, useSelector } from 'react-redux';
-import { selectSort, setSort } from './controls-slice';
-import { FormControl, MenuItem, Select } from '@mui/material';
+import { useSelector } from 'react-redux';
+import { useAppDispatch } from '../../redux-hooks';
+import { setSort } from './controls-slice';
+import { selectSort } from './controls-selectors';
+import { Sort as SortType } from '../../types/sort';
+
+import {
+  FormControl,
+  MenuItem,
+  Select,
+  SelectChangeEvent,
+} from '@mui/material';
 
 export const Sort = () => {
   const sort = useSelector(selectSort);
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
 
-  const handleSort = (event) => {
-    dispatch(setSort(event.target.value));
+  const handleSort = (event: SelectChangeEvent<SortType>) => {
+    dispatch(setSort(event.target.value as SortType));
   };
 
   return (

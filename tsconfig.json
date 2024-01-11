@@ -16,6 +16,5 @@
     "resolveJsonModule": true,
     "skipLibCheck": true,
     "strict": true
-  },
-  "include": ["src/components", "src/custom.d.ts"]
+  }
 }

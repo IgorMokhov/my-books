@@ -1,13 +1,17 @@
-import { useDispatch, useSelector } from 'react-redux';
-import { selectCategory, setCategory } from './controls-slice';
-import { FormControl, MenuItem, Select } from '@mui/material';
+import { useSelector } from 'react-redux';
+import { setCategory } from './controls-slice';
+import { useAppDispatch } from '../../redux-hooks';
+import { selectCategory } from './controls-selectors';
+import { Category as CategoryType } from '../../types';
+
+import { FormControl, MenuItem, Select, SelectChangeEvent } from '@mui/material';
 
 export const Category = () => {
   const category = useSelector(selectCategory);
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch()
 
-  const handleCategory = (event) => {
-    dispatch(setCategory(event.target.value));
+  const handleCategory = (event: SelectChangeEvent<CategoryType>) => {
+    dispatch(setCategory(event.target.value as CategoryType));
   };
 
   return (

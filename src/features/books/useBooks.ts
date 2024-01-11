@@ -1,7 +1,6 @@
 import { useSelector } from 'react-redux';
 
 import { clearBooks } from './books-slice';
-import { selectControls } from '../controls/controls-slice';
 import { selectBooksAllInfo } from './books-selectors';
 import {
   VariantMessage,
@@ -12,6 +11,7 @@ import { loadMoreBooks } from './books-async-actions';
 import { useAppDispatch } from '../../redux-hooks';
 import { GoogleBook, Status, Theme } from '../../types';
 import { selectTheme } from '../theme/theme-selectors';
+import { selectControls } from '../controls/controls-selectors';
 
 export const useBooks = (): {
   loading: Status;
