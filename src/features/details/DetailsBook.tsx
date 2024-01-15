@@ -34,7 +34,7 @@ export const DetailsBook = () => {
     parsedDescription,
   } = useDetailsBooks();
 
-  if (loading === 'failed') {
+  if (loading === 'failed' && error !== null) {
     navigate('/');
     showSnackbar(error, 'error');
   }
@@ -87,7 +87,12 @@ export const DetailsBook = () => {
                 top: '15px',
               }}
             >
-              <FavouritesBtn size="large" id={id} title={title} image={image} /> 
+              <FavouritesBtn
+                size="large"
+                id={id}
+                title={title || 'No title'}
+                image={image || notFoundImg}
+              />
             </Box>
           </Box>
 
@@ -99,7 +104,7 @@ export const DetailsBook = () => {
               },
             }}
           >
-            <Typography>{categories}</Typography>
+            <Typography>{categories || 'No categories'}</Typography>
             <Typography
               sx={{
                 m: '30px 0 5px',

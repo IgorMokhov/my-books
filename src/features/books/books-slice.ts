@@ -5,7 +5,7 @@ import { checkRemainingItems, checkUniqueItems } from './books-utils';
 import { GoogleBook, Status } from '../../types/index';
 
 
-export type booksSlice = {
+type BooksSlice = {
   loading: Status;
   loadingButton: boolean;
   entities: GoogleBook[];
@@ -16,7 +16,7 @@ export type booksSlice = {
 };
 
 
-const initialState: booksSlice = {
+const initialState: BooksSlice = {
   loading: 'idle',
   loadingButton: false,
   entities: [],
@@ -26,7 +26,6 @@ const initialState: booksSlice = {
   isRemainingItems: false,
 };
 
-// eslint-disable-next-line
 export const booksSlice = createSlice({
   name: '@@books',
   initialState,

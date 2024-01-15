@@ -1,20 +1,21 @@
 import { useEffect } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
-import { useDispatch, useSelector } from 'react-redux';
-
-import { clearDetails, loadBookById, selectDetails } from './details-slice';
+import { useSelector } from 'react-redux';
+import { useAppDispatch } from '../../redux-hooks';
+import { selectDetails } from './details-selectors';
 import { useCustomSnackbar } from '../../utils/useCustomSnackbar';
-
+import { loadBookById } from './details-async-actions';
+import { clearDetails } from './details-slice';
 import parse from 'html-react-parser';
 
 export const useDetailsBooks = () => {
-  const { id } = useParams();
+  const { id } = useParams() as { id: string };
   const { loading, currentBook, error } = useSelector(selectDetails);
   const showSnackbar = useCustomSnackbar();
   const navigate = useNavigate();
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
 
-  const parseText = (html) => {
+  const parseText = (html: string | undefined) => {
     if (!html) return 'No description ...';
 
     return parse(html); // The html-react-parser library is used for parsing HTML into a component.

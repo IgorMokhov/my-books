@@ -7,6 +7,7 @@ export type GoogleBook = {
     imageLinks?: {
       thumbnail?: string | undefined;
     };
+    description: string | undefined;
   };
 };
 

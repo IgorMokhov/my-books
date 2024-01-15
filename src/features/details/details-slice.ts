@@ -1,15 +1,15 @@
-import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
+import { createSlice } from '@reduxjs/toolkit';
+import { GoogleBook, Status } from '../../types';
+import { loadBookById } from './details-async-actions';
 
-export const loadBookById = createAsyncThunk(
-  '@@details/loadBookById',
-  async (id, { extra: api }) => {
-    const response = api.loadDetailsData(id);
-    return response;
-  }
-);
+type DetailsSlice = {
+  loading: Status;
+  currentBook: GoogleBook | null;
+  error: string | null;
+};
 
-const initialState = {
-  loading: 'idle', // pending / succeeded  / failed
+const initialState: DetailsSlice = {
+  loading: 'idle',
   currentBook: null,
   error: null,
 };
@@ -32,13 +32,10 @@ export const detailsSlice = createSlice({
       })
       .addCase(loadBookById.rejected, (state, action) => {
         state.loading = 'failed';
-        state.error = action.error.message;
+        state.error = action.error.message || 'Unknown error';
       });
   },
 });
 
 export const detailsReducer = detailsSlice.reducer;
 export const { clearDetails } = detailsSlice.actions;
-
-// selectors
-export const selectDetails = (state) => state.details;

@@ -1,19 +1,18 @@
 import { PayloadAction, createSlice } from '@reduxjs/toolkit';
 import { Category, Sort } from '../../types';
 
-type controlsSlice = {
+type ControlsSlice = {
   search: string;
   category: Category;
   sort: Sort;
 };
 
-const initialState: controlsSlice = {
+const initialState: ControlsSlice = {
   search: '',
   category: 'all',
   sort: 'relevance',
 };
 
-// eslint-disable-next-line
 export const controlsSlice = createSlice({
   name: '@@controls',
   initialState,

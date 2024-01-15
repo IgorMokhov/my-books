@@ -1,12 +1,12 @@
 import { PayloadAction, createSlice } from '@reduxjs/toolkit';
 import { AppBook, FavouriteAppBook } from '../../types';
 
-type favouritesSlice = {
+type FavouritesSlice = {
   isOpen: boolean;
   list: FavouriteAppBook[];
 };
 
-const initialState: favouritesSlice = {
+const initialState: FavouritesSlice = {
   isOpen: false,
   list: [],
 };
