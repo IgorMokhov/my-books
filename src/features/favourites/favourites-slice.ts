@@ -11,7 +11,6 @@ const initialState: FavouritesSlice = {
   list: [],
 };
 
-// eslint-disable-next-line
 const favouritesSlice = createSlice({
   name: '@@favourites',
   initialState,

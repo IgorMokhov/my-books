@@ -1,13 +1,13 @@
 export type GoogleBook = {
   id: string;
   volumeInfo: {
-    title?: string | undefined;
-    authors?: string[] | undefined;
-    categories?: string[] | undefined;
+    title?: string;
+    authors?: string[];
+    categories?: string[];
     imageLinks?: {
-      thumbnail?: string | undefined;
+      thumbnail?: string;
     };
-    description: string | undefined;
+    description?: string;
   };
 };
 

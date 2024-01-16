@@ -12,6 +12,7 @@ import { useAppDispatch } from '../../redux-hooks';
 import { GoogleBook, Status, Theme } from '../../types';
 import { selectTheme } from '../theme/theme-selectors';
 import { selectControls } from '../controls/controls-selectors';
+import { AppDispatch } from '../../store';
 
 export const useBooks = (): {
   loading: Status;
@@ -21,6 +22,7 @@ export const useBooks = (): {
   error: string | null;
   isRemainingItems: boolean;
   theme: Theme;
+  dispatch: AppDispatch;
   clearHandler: () => void;
   showSnackbar: (message: string, variant: VariantMessage) => void;
   loadMoreHandler: () => void;
@@ -56,6 +58,7 @@ export const useBooks = (): {
     error,
     isRemainingItems,
     theme,
+    dispatch,
     clearHandler,
     showSnackbar,
     loadMoreHandler,

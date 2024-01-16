@@ -1,3 +1,4 @@
+import { useEffect } from 'react';
 import { GoogleBook } from '../../types';
 import { BookCard } from './BookCard';
 import { useBooks } from './useBooks';
@@ -14,6 +15,7 @@ import {
   Tooltip,
   Typography,
 } from '@mui/material';
+import { clearError } from './books-slice';
 
 export const BooksList = () => {
   const {
@@ -24,14 +26,19 @@ export const BooksList = () => {
     error,
     isRemainingItems,
     theme,
+    dispatch,
     clearHandler,
     showSnackbar,
     loadMoreHandler,
   } = useBooks();
 
-  if (loading === 'failed' && error !== null) {
-    showSnackbar(error, 'error');
-  }
+  // show error message
+  useEffect(() => {
+    if (loading === 'failed' && error !== null) {
+      showSnackbar(error, 'error');
+      dispatch(clearError());
+    }
+  }, [error, loading, dispatch, showSnackbar]);
 
   return (
     <Container maxWidth="lg">
@@ -58,6 +65,7 @@ export const BooksList = () => {
           </Tooltip>
         </Box>
       )}
+
       {total === 0 && (
         <Typography
           sx={{ mb: '20px', fontWeight: '400' }}
@@ -67,9 +75,11 @@ export const BooksList = () => {
           Nothing found
         </Typography>
       )}
+
       {loading === 'pending' && (
         <CircularProgress sx={{ m: '20px 0' }} color="secondary" />
       )}
+
       <Grid sx={{ mb: '40px' }} container rowSpacing={3} columnSpacing={2}>
         {loading === 'succeeded' &&
           entities?.map((book: GoogleBook) => (
@@ -84,7 +94,7 @@ export const BooksList = () => {
           ))}
       </Grid>
 
-      {total && isRemainingItems && (
+      {entities.length > 0 && isRemainingItems && (
         <Button
           sx={{
             mb: '40px',

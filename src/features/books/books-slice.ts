@@ -4,8 +4,7 @@ import { loadBooks, loadMoreBooks } from './books-async-actions';
 import { checkRemainingItems, checkUniqueItems } from './books-utils';
 import { GoogleBook, Status } from '../../types/index';
 
-
-type BooksSlice = {
+export type BooksSlice = {
   loading: Status;
   loadingButton: boolean;
   entities: GoogleBook[];
@@ -14,7 +13,6 @@ type BooksSlice = {
   error: string | null;
   isRemainingItems: boolean;
 };
-
 
 const initialState: BooksSlice = {
   loading: 'idle',
@@ -33,6 +31,9 @@ export const booksSlice = createSlice({
     setError: (state, action: PayloadAction<string>) => {
       state.error = action.payload;
     },
+    clearError: (state) => {
+      state.error = null;
+    },
     clearBooks: () => initialState,
   },
   extraReducers: (builder) => {
@@ -46,7 +47,7 @@ export const booksSlice = createSlice({
       })
       .addCase(loadBooks.fulfilled, (state, action) => {
         state.loading = 'succeeded';
-        state.entities = action.payload.items;
+        state.entities = action.payload.items || [];
         state.total = action.payload.totalItems;
         state.page = 1;
         state.error = null;
@@ -60,7 +61,7 @@ export const booksSlice = createSlice({
         state.loadingButton = true;
       })
       .addCase(loadMoreBooks.fulfilled, (state, action) => {
-        state.entities = checkUniqueItems(state, action.payload.items || []); // Passing an empty array in case "items" is absent.
+        state.entities = checkUniqueItems(state, action.payload.items || []); 
         state.page = state.page + 1;
         state.loadingButton = false;
         state.isRemainingItems = checkRemainingItems(action.payload.items);
@@ -72,5 +73,5 @@ export const booksSlice = createSlice({
   },
 });
 
-export const { setError, clearBooks } = booksSlice.actions;
+export const { setError, clearError, clearBooks } = booksSlice.actions;
 export const booksReducer = booksSlice.reducer;

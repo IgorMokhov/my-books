@@ -1,4 +1,4 @@
-import { List, ListItem, ListItemText } from "@mui/material";
+import { List, ListItem, ListItemText } from '@mui/material';
 
 export const TechList = () => {
   return (
@@ -6,7 +6,7 @@ export const TechList = () => {
       {[
         'HTML',
         'CSS',
-        'JavaScript',
+        'TypeScript',
         'React',
         'React Router',
         'Redux Toolkit',

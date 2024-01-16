@@ -5,7 +5,8 @@ export const loadBooks = createAsyncThunk<
   ResponseObject,
   RequestParams,
   {
-    extra: Extra; // ThunkApiConfig
+    // Types for ThunkApiConfig
+    extra: Extra;
   }
 >(
   '@@books/loadBooks',
@@ -19,7 +20,7 @@ export const loadMoreBooks = createAsyncThunk<
   ResponseObject,
   RequestParams,
   {
-    extra: Extra; // ThunkApiConfig
+    extra: Extra;
   }
 >(
   '@@books/loadMoreBooks',
