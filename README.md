@@ -1,10 +1,10 @@
 # My Books
 
-
 ![demo](https://github.com/IgorMokhov/my-books/assets/115712538/72db7c85-725f-4e2d-b0d7-31fa9a78a3cd)
 [Deployed Project](https://my-books-gamma.vercel.app/)
 
 ## Introduction
+
 "My Books" is a React Single Page Application (SPA) designed for searching books using the Google Books API. This project allows users to explore a vast collection of books, leveraging the power of the Google Books API. The application is built with a modern and efficient tech stack, ensuring a smooth and responsive user experience.
 
 ## Features
@@ -46,6 +46,8 @@
 - Responsive design up to 320px.
 
 ## Technologies
+
+- [**TypeScript**](https://www.typescriptlang.org/): A superset of JavaScript that adds static types to the language.
 - [**React**](https://reactjs.org/): A JavaScript library for building user interfaces.
 - [**React Router**](https://reactrouter.com/): Enables navigation and routing in the React application.
 - [**Redux Toolkit**](https://redux-toolkit.js.org/): Facilitates state management in React applications.
@@ -56,23 +58,29 @@
 - [**Notistack**](https://www.npmjs.com/package/notistack): A notification library for React applications.
 
 ## Getting Started
+
 To install and use the project, follow these steps:
 
 ### API Key
+
 1. Obtain an API key from [Google Developers Console](https://console.developers.google.com/).
 2. Create a new file named `.env` in the root directory of the project.
 3. Add your API key to the `.env` file:
+
 ```env
   REACT_APP_API_KEY=your_api_key
 ```
+
 [env.example.txt](env.example.txt) - see the env.example.txt
 
 <br/>
 
 ### Installation
+
 1. Clone the repository to your local machine.
 2. Navigate to the project directory in the terminal.
 3. Run the following command to install dependencies:
+
 ```sh
   npm install
 ```
@@ -80,21 +88,26 @@ To install and use the project, follow these steps:
 <br/>
 
 ### Usage
+
 To start the development server, use the following command:
+
 ```sh
   npm start
 ```
+
 Visit the provided local URL in your browser to explore the "My Books" application.
 
 <br/>
 
 ### Build
+
 For a production build, run the following command:
+
 ```sh
   npm run build
 ```
-<br/>
 
+<br/>
 
 <br/>
 
@@ -105,10 +118,8 @@ This project is licensed under the [MIT License](LICENSE.md) - see the LICENSE.m
 <br/>
 
 ## Author
-If you have questions, write me an email  
-  
+
+If you have questions, write me an email
+
 Igor Mokhov — Frontend Developer<br/>
 igormokhovid@gmail.com
-
-
-
