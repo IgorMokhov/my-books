@@ -7,6 +7,7 @@ import githubIcon from '../accets/icons/github-icon.svg';
 import githubIconWhite from '../accets/icons/github-icon-white.svg';
 
 import { Container, Divider, Paper, Typography } from '@mui/material';
+import { ReturnUpBtn } from './ReturnUpBtn';
 
 export const Footer = () => {
   const theme = useSelector(selectTheme);
@@ -52,6 +53,7 @@ export const Footer = () => {
               alt="github-icon"
             />
           </Link>
+          <ReturnUpBtn />
         </Container>
       </Paper>
     </footer>
