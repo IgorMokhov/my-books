@@ -1,9 +1,12 @@
 import { useEffect, useState } from 'react';
+import { useSelector } from 'react-redux';
 import { IconButton } from '@mui/material';
+import { selectTheme } from '../features/theme/theme-selectors';
 import ArrowCircleUpIcon from '@mui/icons-material/ArrowCircleUp';
 
 export const ReturnUpBtn = () => {
   const [isVisibility, setIsVisibility] = useState(false);
+  const theme = useSelector(selectTheme);
 
   const handleScrollUp = () => {
     if (document.body.scrollTop > 0 || document.documentElement.scrollTop > 0) {
@@ -36,7 +39,10 @@ export const ReturnUpBtn = () => {
           }}
           onClick={handleScrollUp}
         >
-          <ArrowCircleUpIcon sx={{ color: 'black' }} fontSize="large" />
+          <ArrowCircleUpIcon
+            sx={{ color: theme === 'light' ? 'black' : 'white' }}
+            fontSize="large"
+          />
         </IconButton>
       )}
     </>
